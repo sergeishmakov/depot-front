@@ -3,3 +3,7 @@ export const userCreateApi = async user => {
   const res = await axios.post (`http://localhost:3000/register`, user);
   return res.data;
 };
+export const autenticateApi = async user => {
+  const res = await axios.post (`http://localhost:3000/login`, user);
+  return res.data;
+};
