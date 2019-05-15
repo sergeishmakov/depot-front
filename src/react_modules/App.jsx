@@ -1,12 +1,15 @@
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
+import Main from './components/main/main';
 
-const App = ({ children }) => (
+const App = ({children}) => (
   <Fragment>
     <Header />
-    {children}
+    <Main>
+      {children}
+    </Main>
     <Footer />
   </Fragment>
 );

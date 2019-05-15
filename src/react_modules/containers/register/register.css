@@ -1,3 +1,39 @@
 .register-wrapper {
-  display: inline-block;
+  width: 40%;
+  text-align: center;
+
+}
+.form-wrapper {
+  text-align: left;
+}
+.input-wrapper {
+ margin-bottom: 20px;
+ margin-top: 10px;
+}
+.register-button {
+  width: 100px;
+  margin: 40px;
+  padding: 10px;
+  border-radius: 5px;
+  background: linear-gradient(white, rgb(202, 201, 201));
+  border: 1px solid rgb(148, 148, 148);
+}
+
+.register-input {
+  padding: 10px;
+  outline: none;
+  font-size: 1.2em;
+  width: 100%;
+  border: 2px solid rgb(148, 148, 148);
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255, 0);
+  z-index: 3;
+}
+
+.error {
+  width: 100%;
+  color: black;
+  border:2px solid red;
+  background-color: rgb(253, 125, 125);
+  padding: 10px;
 }
