@@ -10,6 +10,7 @@ import {Provider} from 'react-redux';
 import Home from './react_modules/containers/home/home';
 import Users from './react_modules/containers/users/users';
 import Register from './react_modules/containers/register/register';
+import Login from './react_modules/containers/login/login';
 import Error from './react_modules/containers/error/error';
 
 ReactDOM.render (
@@ -20,6 +21,7 @@ ReactDOM.render (
           <Route exact path="/" component={Home} />
           <Route path="/users" component={Users} />
           <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
           <Route path="*" component={Error} />
         </Switch>
       </App>
