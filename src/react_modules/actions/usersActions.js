@@ -15,9 +15,10 @@ export const addUser = data => async dispatch => {
 };
 
 export const autenticateUser = data => async dispatch => {
-  const [user, created] = await autenticateApi (data);
+  console.log ('action');
+  const user = await autenticateApi (data);
   dispatch ({
-    type: CREATE_USER_SUCCESS || CREATE_USER_FAILURE,
-    payload: '',
+    type: user ? CREATE_USER_SUCCESS : CREATE_USER_FAILURE,
+    payload: user ? user : null,
   });
 };

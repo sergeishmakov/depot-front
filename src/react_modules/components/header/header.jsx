@@ -9,7 +9,6 @@ const Header = () => (
         <li><NavLink exact to="/">Home</NavLink></li>
         <li><NavLink to="/users">Users</NavLink></li>
         <li><NavLink to="/register">Register</NavLink></li>
-        <li><NavLink to="/login">Login</NavLink></li>
       </ul>
     </nav>
   </header>

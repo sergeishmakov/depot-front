@@ -1,10 +1,5 @@
 .main {
-  background-color: white;
   display: flex;
   flex-flow: nowrap row;
   justify-content: center;
-  width: 80%;
-  margin: auto;
-  border-left: 3px solid #d43728;
-  border-right: 3px solid #d43728;
 }

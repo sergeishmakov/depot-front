@@ -21,7 +21,6 @@ ReactDOM.render (
           <Route exact path="/" component={Home} />
           <Route path="/users" component={Users} />
           <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
           <Route path="*" component={Error} />
         </Switch>
       </App>

@@ -5,6 +5,7 @@ import validator from 'validator';
 import './register.css';
 
 import {addUser} from '../../actions/usersActions';
+import Main from '../../components/main/main';
 
 class Register extends Component {
   state = {
@@ -69,90 +70,125 @@ class Register extends Component {
       isValidEmail,
     } = this.state;
     return (
-      <div className="register-wrapper">
-        <h2>Registration form</h2>
-        {this.props.users.error &&
-          <p className="error">{this.props.users.message} </p>}
-        <div className="form-wrapper">
-          <label htmlFor="firstName">Enter your first name:</label>
-          <div className="input-wrapper">
-            <input
-              name="firstName"
-              className="register-input"
-              type="text"
-              value={firstName}
-              onChange={this.onChange}
-              placeholder="First name"
-            />
-          </div>
-          <label htmlFor="lastName">Enter your last name:</label>
-          <div className="input-wrapper">
-            <input
-              name="lastName"
-              className="register-input"
-              type="text"
-              value={lastName}
-              onChange={this.onChange}
-              placeholder="Last name"
-            />
-
-          </div>
-          <label htmlFor="email">Enter your email address:</label>
-          <div className="input-wrapper">
-            {!isValidEmail &&
-              email &&
-              <p className="error">Invalid email address</p>}
-            <input
-              name="email"
-              className="register-input"
-              type="text"
-              value={email}
-              onChange={this.onChange}
-              placeholder="Email"
-            />
-
-          </div>
-          <label htmlFor="password">Enter your password:</label>
-          <div className="input-wrapper">
-            {!isValidPassword &&
-              password &&
-              <p className="error">Password is too short</p>}
-            <input
-              name="password"
-              className="register-input"
-              type="password"
-              value={password}
-              onChange={this.onChange}
-              placeholder="Password"
-            />
-          </div>
-          <label htmlFor="confirmPassword">Enter password again:</label>
-          <div className="input-wrapper">
-            {!isValidConfirmPassword &&
-              confirmPassword &&
-              <p className="error">Passwords do not match</p>}
-            <input
-              name="confirmPassword"
-              className="register-input"
-              type="password"
-              value={confirmPassword}
-              onChange={this.onChange}
-              placeholder="Confirm password"
-            />
-          </div>
-
+      <Main>
+        <div className="register-wrapper">
+          <h2>Registration form</h2>
+          <form>
+            <div className="form-row">
+              <div className="col-md-4 mb-3">
+                <label for="validationServer01">First name</label>
+                <input
+                  type="text"
+                  className="form-control is-valid"
+                  id="validationServer01"
+                  placeholder="First name"
+                  value="Mark"
+                  required
+                />
+                <div className="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div className="col-md-4 mb-3">
+                <label for="validationServer02">Last name</label>
+                <input
+                  type="text"
+                  className="form-control is-valid"
+                  id="validationServer02"
+                  placeholder="Last name"
+                  value="Otto"
+                  required
+                />
+                <div className="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div className="col-md-4 mb-3">
+                <label for="validationServerUsername">Username</label>
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text" id="inputGroupPrepend3">
+                      @
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    className="form-control is-invalid"
+                    id="validationServerUsername"
+                    placeholder="Username"
+                    aria-describedby="inputGroupPrepend3"
+                    required
+                  />
+                  <div className="invalid-feedback">
+                    Please choose a username.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="col-md-6 mb-3">
+                <label for="validationServer03">City</label>
+                <input
+                  type="text"
+                  className="form-control is-invalid"
+                  id="validationServer03"
+                  placeholder="City"
+                  required
+                />
+                <div className="invalid-feedback">
+                  Please provide a valid city.
+                </div>
+              </div>
+              <div className="col-md-3 mb-3">
+                <label for="validationServer04">State</label>
+                <input
+                  type="text"
+                  className="form-control is-invalid"
+                  id="validationServer04"
+                  placeholder="State"
+                  required
+                />
+                <div className="invalid-feedback">
+                  Please provide a valid state.
+                </div>
+              </div>
+              <div className="col-md-3 mb-3">
+                <label for="validationServer05">Zip</label>
+                <input
+                  type="text"
+                  className="form-control is-invalid"
+                  id="validationServer05"
+                  placeholder="Zip"
+                  required
+                />
+                <div className="invalid-feedback">
+                  Please provide a valid zip.
+                </div>
+              </div>
+            </div>
+            <div className="form-group">
+              <div className="form-check">
+                <input
+                  className="form-check-input is-invalid"
+                  type="checkbox"
+                  value=""
+                  id="invalidCheck3"
+                  required
+                />
+                <label className="form-check-label" for="invalidCheck3">
+                  Agree to terms and conditions
+                </label>
+                <div className="invalid-feedback">
+                  You must agree before submitting.
+                </div>
+              </div>
+            </div>
+            <button className="btn btn-primary" type="submit">
+              Submit form
+            </button>
+          </form>
         </div>
-        <button
-          disabled={
-            !isValidEmail && !isValidPassword && !isValidConfirmPassword
-          }
-          className="register-button"
-          onClick={this.registerUser}
-        >
-          Register
-        </button>
-
-      </div>
+      </Main>
     );
   }
 }
