@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import validator from 'validator';
 
@@ -6,6 +6,7 @@ import './register.css';
 
 import {addUser} from '../../actions/usersActions';
 import Main from '../../components/main/main';
+import Header from '../../components/header/header';
 
 class Register extends Component {
   state = {
@@ -17,34 +18,40 @@ class Register extends Component {
     isValidPassword: false,
     isValidConfirmPassword: false,
     isValidEmail: false,
+    agreeCheck: false,
   };
   onChange = e => {
-    const {name, value} = e.currentTarget;
-    this.setState ({[name]: value});
-    switch (name) {
-      case 'email':
-        this.setState ({
-          isValidEmail: validator.isEmail (value) ? true : false,
-        });
-        break;
-      case 'password':
-        this.setState ({
-          isValidPassword: value.length >= 5 ? true : false,
-        });
-        break;
-      case 'confirmPassword':
-        this.setState ({
-          isValidConfirmPassword: value === this.state.password &&
-            value.length >= 5
-            ? true
-            : false,
-        });
-        break;
-      default:
-        return null;
+    const {id, value} = e.currentTarget;
+    if (id !== 'agreeCheck') {
+      this.setState ({[id]: value});
+      switch (id) {
+        case 'email':
+          this.setState ({
+            isValidEmail: validator.isEmail (value) ? true : false,
+          });
+          break;
+        case 'password':
+          this.setState ({
+            isValidPassword: value.length >= 5 ? true : false,
+          });
+          break;
+        case 'confirmPassword':
+          this.setState ({
+            isValidConfirmPassword: value === this.state.password &&
+              value.length >= 5
+              ? true
+              : false,
+          });
+          break;
+        default:
+          return null;
+      }
+    } else {
+      this.setState ({agreeCheck: !this.state.agreeCheck});
     }
   };
-  registerUser = async () => {
+  registerUser = async e => {
+    e.preventDefault ();
     const {email, lastName, firstName, password} = this.state;
     const user = {
       firstName: firstName,
@@ -64,131 +71,178 @@ class Register extends Component {
       lastName,
       email,
       password,
+      agreeCheck,
       confirmPassword,
       isValidPassword,
       isValidConfirmPassword,
       isValidEmail,
     } = this.state;
     return (
-      <Main>
-        <div className="register-wrapper">
-          <h2>Registration form</h2>
-          <form>
-            <div className="form-row">
-              <div className="col-md-4 mb-3">
-                <label for="validationServer01">First name</label>
-                <input
-                  type="text"
-                  className="form-control is-valid"
-                  id="validationServer01"
-                  placeholder="First name"
-                  value="Mark"
-                  required
-                />
-                <div className="valid-feedback">
-                  Looks good!
-                </div>
-              </div>
-              <div className="col-md-4 mb-3">
-                <label for="validationServer02">Last name</label>
-                <input
-                  type="text"
-                  className="form-control is-valid"
-                  id="validationServer02"
-                  placeholder="Last name"
-                  value="Otto"
-                  required
-                />
-                <div className="valid-feedback">
-                  Looks good!
-                </div>
-              </div>
-              <div className="col-md-4 mb-3">
-                <label for="validationServerUsername">Username</label>
-                <div className="input-group">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text" id="inputGroupPrepend3">
-                      @
-                    </span>
-                  </div>
+      <Fragment>
+        <Header />
+        <Main>
+          <div className="register-wrapper">
+            <h2 className="_gradient-pink-perple-text">Registration form</h2>
+            <form className="_center">
+              <div className="form-col">
+                <div className="col-md-all mb-3">
+                  <label htmlFor="firstName">First name</label>
                   <input
                     type="text"
-                    className="form-control is-invalid"
-                    id="validationServerUsername"
-                    placeholder="Username"
-                    aria-describedby="inputGroupPrepend3"
+                    className={
+                      firstName ? 'form-control is-valid' : 'form-control'
+                    }
+                    id="firstName"
+                    placeholder="First name"
+                    value={firstName}
+                    onChange={this.onChange}
+                    required
+                  />
+                  <div className="valid-feedback">
+                    Looks good!
+                  </div>
+                </div>
+
+                <div className="col-md-all mb-3">
+                  <label htmlFor="lastName">Last name</label>
+                  <input
+                    type="text"
+                    className={
+                      lastName ? 'form-control is-valid' : 'form-control'
+                    }
+                    id="lastName"
+                    placeholder="Last name"
+                    value={lastName}
+                    onChange={this.onChange}
+                    required
+                  />
+                  <div className="valid-feedback">
+                    Looks good!
+                  </div>
+                </div>
+                <div className="col-md-all mb-3">
+                  <label htmlFor="email">Email</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span
+                        className="input-group-text"
+                        id="inputGroupPrepend3"
+                      >
+                        @
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      className={
+                        email
+                          ? !isValidEmail
+                              ? 'form-control is-invalid'
+                              : this.props.users.error
+                                  ? 'form-control is-invalid'
+                                  : 'form-control is-valid'
+                          : 'form-control'
+                      }
+                      id="email"
+                      placeholder="Email"
+                      aria-describedby="inputGroupPrepend3"
+                      onChange={this.onChange}
+                      required
+                    />
+                    {!this.props.users.error
+                      ? <div className="invalid-feedback">
+                          Invalid email address.
+                        </div>
+                      : <div className="invalid-feedback">
+                          {this.props.users.message}
+                        </div>}
+                  </div>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="col-md-middle mb-3">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    className={
+                      password
+                        ? !isValidPassword
+                            ? 'form-control is-invalid'
+                            : 'form-control is-valid'
+                        : 'form-control'
+                    }
+                    id="password"
+                    placeholder="Password"
+                    onChange={this.onChange}
                     required
                   />
                   <div className="invalid-feedback">
-                    Please choose a username.
+                    Invalid password.
                   </div>
                 </div>
+                <div className="col-md-middle mb-3">
+                  <label htmlFor="confirmPassword">
+                    Confirm password
+                  </label>
+                  <input
+                    type="password"
+                    className={
+                      confirmPassword
+                        ? !isValidConfirmPassword
+                            ? 'form-control is-invalid'
+                            : 'form-control is-valid'
+                        : 'form-control'
+                    }
+                    id="confirmPassword"
+                    placeholder="Password"
+                    onChange={this.onChange}
+                    required
+                  />
+                  <div className="invalid-feedback">
+                    Passwords do not match.
+                  </div>
+                </div>
+
               </div>
-            </div>
-            <div className="form-row">
-              <div className="col-md-6 mb-3">
-                <label for="validationServer03">City</label>
-                <input
-                  type="text"
-                  className="form-control is-invalid"
-                  id="validationServer03"
-                  placeholder="City"
-                  required
-                />
-                <div className="invalid-feedback">
-                  Please provide a valid city.
+              <div className="form-group">
+                <div className="form-check">
+                  <input
+                    className="form-check-input is-invalid"
+                    type="checkbox"
+                    value=""
+                    id="agreeCheck"
+                    onChange={this.onChange}
+                    required
+                  />
+                  <label
+                    className={
+                      agreeCheck
+                        ? 'check-label-is-valid'
+                        : 'check-label-is-invalid'
+                    }
+                    htmlFor="agreeCheck"
+                  >
+                    Agree to terms and conditions
+                  </label>
+                  {!agreeCheck &&
+                    <div className="invalid-feedback">
+                      You must agree before sign up
+                    </div>}
                 </div>
               </div>
-              <div className="col-md-3 mb-3">
-                <label for="validationServer04">State</label>
-                <input
-                  type="text"
-                  className="form-control is-invalid"
-                  id="validationServer04"
-                  placeholder="State"
-                  required
-                />
-                <div className="invalid-feedback">
-                  Please provide a valid state.
-                </div>
-              </div>
-              <div className="col-md-3 mb-3">
-                <label for="validationServer05">Zip</label>
-                <input
-                  type="text"
-                  className="form-control is-invalid"
-                  id="validationServer05"
-                  placeholder="Zip"
-                  required
-                />
-                <div className="invalid-feedback">
-                  Please provide a valid zip.
-                </div>
-              </div>
-            </div>
-            <div className="form-group">
-              <div className="form-check">
-                <input
-                  className="form-check-input is-invalid"
-                  type="checkbox"
-                  value=""
-                  id="invalidCheck3"
-                  required
-                />
-                <label className="form-check-label" for="invalidCheck3">
-                  Agree to terms and conditions
-                </label>
-                <div className="invalid-feedback">
-                  You must agree before submitting.
-                </div>
-              </div>
-            </div>
-            <button className="btn btn-primary" type="submit">
-              Submit form
-            </button>
-          </form>
-        </div>
-      </Main>
+              <button
+                disabled={
+                  !isValidEmail && !isValidPassword && !isValidConfirmPassword
+                }
+                className="btn btn-primary _gradient-pink-perple"
+                onClick={this.registerUser}
+                // type="submit"
+              >
+                Sign Up
+              </button>
+            </form>
+          </div>
+        </Main>
+      </Fragment>
     );
   }
 }

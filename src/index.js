@@ -11,7 +11,6 @@ import Home from './react_modules/containers/home/home';
 import Users from './react_modules/containers/users/users';
 import Register from './react_modules/containers/register/register';
 import Error from './react_modules/containers/error/error';
-import Login from './react_modules/containers/login/login';
 
 ReactDOM.render (
   <Provider store={store}>

@@ -8,10 +8,16 @@ const Header = () => (
       <ul className="nav">
         <li><NavLink exact to="/">Home</NavLink></li>
         <li><NavLink to="/users">Users</NavLink></li>
-        <li><NavLink to="/register">Register</NavLink></li>
+
       </ul>
     </nav>
+    <div>
+      <ul>
+        <li><NavLink to="/login">Sign In</NavLink></li>
+        <li><NavLink to="/register">Sign Up</NavLink></li>
+        <li><NavLink to="/logout">Sign Out</NavLink></li>
+      </ul>
+    </div>
   </header>
 );
-
 export default Header;

@@ -1,39 +1,59 @@
-.register-wrapper {
-  width: 40%;
-  text-align: center;
+.register-wrapper{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 100px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 50px;
+}
+.check-label-is-invalid{
+ 
+  color: #dc3545;
+}
+.check-label-is-valid{
+ 
+  color: #28a745;
+}
+.error-feedback {
+  color: #dc3545;
+  font-size: 16pt;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+._center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.btn {
+  border: 0px;
+  border-radius: 20px;
+}
 
+._gradient-pink-perple {
+  background: linear-gradient(0.25turn, #c33764, #1d2671);
 }
-.form-wrapper {
-  text-align: left;
+._gradient-pink-perple-text {
+  background: linear-gradient(0.25turn, #c33764, #1d2671);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.input-wrapper {
- margin-bottom: 20px;
- margin-top: 10px;
-}
-.register-button {
-  width: 100px;
-  margin: 40px;
-  padding: 10px;
-  border-radius: 5px;
-  background: linear-gradient(white, rgb(202, 201, 201));
-  border: 1px solid rgb(148, 148, 148);
-}
-
-.register-input {
-  padding: 10px;
-  outline: none;
-  font-size: 1.2em;
-  width: 100%;
-  border: 2px solid rgb(148, 148, 148);
-  border-radius: 5px;
-  background-color: rgb(255, 255, 255, 0);
-  z-index: 3;
-}
-
-.error {
-  width: 100%;
-  color: black;
-  border:2px solid red;
-  background-color: rgb(253, 125, 125);
-  padding: 10px;
-}
+@media (max-width: 481px) {
+  /*Эти стили применятся на экранах шириной менее 481px */
+  main{
+    padding: 0px;
+  }
+  .register-wrapper {
+    border-radius: 0px;
+    margin: 0px;
+  }
+  }
+  @media (min-width: 481px) and (max-width: 768px) {
+  /*Эти применятся на экранах более 481px и менее 768px */
+  
+  }
+  @media (min-width: 768px) {
+  /* Эти стили применятся на экранах шириной более 768px */
+  
+  }
