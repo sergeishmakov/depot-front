@@ -3,9 +3,7 @@ import {connect} from 'react-redux';
 import validator from 'validator';
 import './login.css';
 
-import {autenticateUser} from '../../actions/usersActions';
-import Main from '../../components/main/main';
-import Header from '../../components/header/header';
+import {authorizationUser} from '../../actions/usersActions';
 
 class Login extends Component {
   state = {
@@ -16,9 +14,9 @@ class Login extends Component {
   };
 
   onChange = e => {
-    const {name, value} = e.currentTarget;
-    this.setState ({[name]: value});
-    switch (name) {
+    const {id, value} = e.currentTarget;
+    this.setState ({[id]: value});
+    switch (id) {
       case 'email':
         this.setState ({
           isValidEmail: validator.isEmail (value) ? true : false,
@@ -34,60 +32,105 @@ class Login extends Component {
     }
   };
 
-  userLogin = async () => {
+  userLogin = e => {
+    e.preventDefault ();
     let user = {
       email: this.state.email,
       password: this.state.password,
     };
-    await autenticateUser (user);
+    this.props.authorizationUser (user);
   };
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.users.email) this.props.onClickBackground ();
+  }
 
   render () {
     const {email, password, isValidEmail, isValidPassword} = this.state;
     return (
       <Fragment>
-        <Header />
-        <Main>
+
+        <div className="login-wrapper-border">
           <div className="login-wrapper">
-            <h1>Logining</h1>
-            <div className="login-form">
-              <div className="input-wrapper">
-                <input
-                  name="email"
-                  value={email}
-                  className="input-login"
-                  type="text"
-                  placeholder="Enter email address"
-                  onChange={this.onChange}
-                />
-                {!isValidEmail &&
-                  email &&
-                  <p className="login-error"> Invalid email address</p>}
+            <h1 className="_gradient-pink-perple-text">Sign Up</h1>
+            <form className="_width-all">
+              <div className="form-col">
+                <div className="form-group ">
+                  <label htmlFor="email">Enter email address</label>
+                  <input
+                    type="email"
+                    className={
+                      email
+                        ? !isValidEmail
+                            ? 'form-control is-invalid'
+                            : this.props.users.message === 'email'
+                                ? 'form-control is-invalid'
+                                : 'form-control is-valid'
+                        : 'form-control'
+                    }
+                    id="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={this.onChange}
+                    required
+                  />
+                  {this.props.users.message === 'email' &&
+                    <div className="invalid-feedback">
+                      Invalid email
+                    </div>}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="password">Enter password</label>
+                  <input
+                    type="password"
+                    className={
+                      password
+                        ? !isValidPassword
+                            ? 'form-control is-invalid'
+                            : this.props.users.message === 'password'
+                                ? 'form-control is-invalid'
+                                : 'form-control is-valid'
+                        : 'form-control'
+                    }
+                    id="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={this.onChange}
+                    required
+                  />
+                  {this.props.users.message === 'password' &&
+                    <div className="invalid-feedback">
+                      Invalid password
+                    </div>}
+                </div>
+
+                <div className="_element-align-right">
+                  <a href="/forgot">Forgot password?</a>
+                </div>
+
+                <button
+                  className="btn btn-primary _gradient-pink-perple"
+                  onClick={this.userLogin}
+                  // type="submit"
+                >
+                  Sign Up
+                </button>
+
+                <p className="_margin-30">or Sugn Up with</p>
+
+                <div className="auth-icons">
+                  <i className="facebook-icon" /><i className="vk-icon" />
+                </div>
+
+                <p className="_margin-30">If you don't have an account</p>
+
+                <a href="/register">SIGN UP</a>
               </div>
 
-              <div className="input-wrapper">
-                <input
-                  name="password"
-                  value={password}
-                  className="input-login"
-                  type="password"
-                  placeholder="Enter your password"
-                  onChange={this.onChange}
-                />
-                {!isValidPassword &&
-                  password &&
-                  <p className="login-error"> Invalid password</p>}
-              </div>
-              <button
-                disabled={!isValidEmail && !isValidPassword}
-                className="login-buttom"
-                onClick={this.userLogin}
-              >
-                Log in
-              </button>
-            </div>
+            </form>
           </div>
-        </Main>
+        </div>
       </Fragment>
     );
   }
@@ -99,7 +142,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  autenticateUser,
+  authorizationUser,
 };
 
 export default connect (mapStateToProps, mapDispatchToProps) (Login);

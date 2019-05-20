@@ -5,8 +5,6 @@ import validator from 'validator';
 import './register.css';
 
 import {addUser} from '../../actions/usersActions';
-import Main from '../../components/main/main';
-import Header from '../../components/header/header';
 
 class Register extends Component {
   state = {
@@ -79,169 +77,163 @@ class Register extends Component {
     } = this.state;
     return (
       <Fragment>
-        <Header />
-        <Main>
-          <div className="register-wrapper">
-            <h2 className="_gradient-pink-perple-text">Registration form</h2>
-            <form className="_center">
-              <div className="form-col">
-                <div className="col-md-all mb-3">
-                  <label htmlFor="firstName">First name</label>
-                  <input
-                    type="text"
-                    className={
-                      firstName ? 'form-control is-valid' : 'form-control'
-                    }
-                    id="firstName"
-                    placeholder="First name"
-                    value={firstName}
-                    onChange={this.onChange}
-                    required
-                  />
-                  <div className="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-
-                <div className="col-md-all mb-3">
-                  <label htmlFor="lastName">Last name</label>
-                  <input
-                    type="text"
-                    className={
-                      lastName ? 'form-control is-valid' : 'form-control'
-                    }
-                    id="lastName"
-                    placeholder="Last name"
-                    value={lastName}
-                    onChange={this.onChange}
-                    required
-                  />
-                  <div className="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                <div className="col-md-all mb-3">
-                  <label htmlFor="email">Email</label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span
-                        className="input-group-text"
-                        id="inputGroupPrepend3"
-                      >
-                        @
-                      </span>
-                    </div>
-                    <input
-                      type="text"
-                      className={
-                        email
-                          ? !isValidEmail
-                              ? 'form-control is-invalid'
-                              : this.props.users.error
-                                  ? 'form-control is-invalid'
-                                  : 'form-control is-valid'
-                          : 'form-control'
-                      }
-                      id="email"
-                      placeholder="Email"
-                      aria-describedby="inputGroupPrepend3"
-                      onChange={this.onChange}
-                      required
-                    />
-                    {!this.props.users.error
-                      ? <div className="invalid-feedback">
-                          Invalid email address.
-                        </div>
-                      : <div className="invalid-feedback">
-                          {this.props.users.message}
-                        </div>}
-                  </div>
+        <div className="register-wrapper">
+          <h2 className="_gradient-pink-perple-text">Registration form</h2>
+          <form>
+            <div className="form-col">
+              <div className="form-group">
+                <label htmlFor="firstName">First name</label>
+                <input
+                  type="text"
+                  className={
+                    firstName ? 'form-control is-valid' : 'form-control'
+                  }
+                  id="firstName"
+                  placeholder="First name"
+                  value={firstName}
+                  onChange={this.onChange}
+                  required
+                />
+                <div className="valid-feedback">
+                  Looks good!
                 </div>
               </div>
-              <div className="form-row">
-                <div className="col-md-middle mb-3">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    className={
-                      password
-                        ? !isValidPassword
-                            ? 'form-control is-invalid'
-                            : 'form-control is-valid'
-                        : 'form-control'
-                    }
-                    id="password"
-                    placeholder="Password"
-                    onChange={this.onChange}
-                    required
-                  />
-                  <div className="invalid-feedback">
-                    Invalid password.
-                  </div>
-                </div>
-                <div className="col-md-middle mb-3">
-                  <label htmlFor="confirmPassword">
-                    Confirm password
-                  </label>
-                  <input
-                    type="password"
-                    className={
-                      confirmPassword
-                        ? !isValidConfirmPassword
-                            ? 'form-control is-invalid'
-                            : 'form-control is-valid'
-                        : 'form-control'
-                    }
-                    id="confirmPassword"
-                    placeholder="Password"
-                    onChange={this.onChange}
-                    required
-                  />
-                  <div className="invalid-feedback">
-                    Passwords do not match.
-                  </div>
-                </div>
 
+              <div className="form-group">
+                <label htmlFor="lastName">Last name</label>
+                <input
+                  type="text"
+                  className={
+                    lastName ? 'form-control is-valid' : 'form-control'
+                  }
+                  id="lastName"
+                  placeholder="Last name"
+                  value={lastName}
+                  onChange={this.onChange}
+                  required
+                />
+                <div className="valid-feedback">
+                  Looks good!
+                </div>
               </div>
               <div className="form-group">
-                <div className="form-check">
+                <label htmlFor="email">Email</label>
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text" id="inputGroupPrepend3">
+                      @
+                    </span>
+                  </div>
                   <input
-                    className="form-check-input is-invalid"
-                    type="checkbox"
-                    value=""
-                    id="agreeCheck"
+                    type="text"
+                    className={
+                      email
+                        ? !isValidEmail
+                            ? 'form-control is-invalid'
+                            : this.props.users.error
+                                ? 'form-control is-invalid'
+                                : 'form-control is-valid'
+                        : 'form-control'
+                    }
+                    id="email"
+                    placeholder="Email"
+                    aria-describedby="inputGroupPrepend3"
                     onChange={this.onChange}
                     required
                   />
-                  <label
-                    className={
-                      agreeCheck
-                        ? 'check-label-is-valid'
-                        : 'check-label-is-invalid'
-                    }
-                    htmlFor="agreeCheck"
-                  >
-                    Agree to terms and conditions
-                  </label>
-                  {!agreeCheck &&
-                    <div className="invalid-feedback">
-                      You must agree before sign up
-                    </div>}
+                  {!this.props.users.error
+                    ? <div className="invalid-feedback">
+                        Invalid email address.
+                      </div>
+                    : <div className="invalid-feedback">
+                        {this.props.users.message}
+                      </div>}
                 </div>
               </div>
-              <button
-                disabled={
-                  !isValidEmail && !isValidPassword && !isValidConfirmPassword
-                }
-                className="btn btn-primary _gradient-pink-perple"
-                onClick={this.registerUser}
-                // type="submit"
-              >
-                Sign Up
-              </button>
-            </form>
-          </div>
-        </Main>
+            </div>
+            <div className="form-row">
+              <div className="col-md-middle mb-3">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  className={
+                    password
+                      ? !isValidPassword
+                          ? 'form-control is-invalid'
+                          : 'form-control is-valid'
+                      : 'form-control'
+                  }
+                  id="password"
+                  placeholder="Password"
+                  onChange={this.onChange}
+                  required
+                />
+                <div className="invalid-feedback">
+                  Invalid password.
+                </div>
+              </div>
+              <div className="col-md-middle mb-3">
+                <label htmlFor="confirmPassword">
+                  Confirm password
+                </label>
+                <input
+                  type="password"
+                  className={
+                    confirmPassword
+                      ? !isValidConfirmPassword
+                          ? 'form-control is-invalid'
+                          : 'form-control is-valid'
+                      : 'form-control'
+                  }
+                  id="confirmPassword"
+                  placeholder="Password"
+                  onChange={this.onChange}
+                  required
+                />
+                <div className="invalid-feedback">
+                  Passwords do not match.
+                </div>
+              </div>
+
+            </div>
+            <div className="form-group">
+              <div className="form-check">
+                <input
+                  className="form-check-input is-invalid"
+                  type="checkbox"
+                  value=""
+                  id="agreeCheck"
+                  onChange={this.onChange}
+                  required
+                />
+                <label
+                  className={
+                    agreeCheck
+                      ? 'check-label-is-valid'
+                      : 'check-label-is-invalid'
+                  }
+                  htmlFor="agreeCheck"
+                >
+                  Agree to terms and conditions
+                </label>
+                {!agreeCheck &&
+                  <div className="invalid-feedback">
+                    You must agree before sign up
+                  </div>}
+              </div>
+            </div>
+            <button
+              disabled={
+                !isValidEmail && !isValidPassword && !isValidConfirmPassword
+              }
+              className="btn btn-primary _gradient-pink-perple"
+              onClick={this.registerUser}
+              // type="submit"
+            >
+              Sign Up
+            </button>
+          </form>
+        </div>
       </Fragment>
     );
   }

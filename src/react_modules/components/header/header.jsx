@@ -1,10 +1,9 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import './header.css';
-import {connect} from 'react-redux';
-import {logOut} from '../../actions/usersActions';
 
-const Header = () => (
+import './header.css';
+
+const Header = ({onVisibleLoginForm, onLogOut, user}) => (
   <header className="header">
     <nav className="nav-menu">
       <NavLink exact to="/">Home</NavLink>
@@ -12,20 +11,15 @@ const Header = () => (
     </nav>
 
     <nav className="nav-user-panel">
-      <NavLink to="/login">Sign In</NavLink>
-      <NavLink to="/register">Sign Up</NavLink>
-      <NavLink onClick={logOut}>Sign Out</NavLink>
+      {user &&
+        <p className="nav-user-panel_hello">
+          Hello, {user.firstName || 'Friend'}
+        </p>}
+      {!user && <button onClick={onVisibleLoginForm}>Sign In</button>}
+      {!user && <NavLink to="/register">Sign Up</NavLink>}
+      {user && <button onClick={onLogOut}>Sign Out</button>}
     </nav>
   </header>
 );
-const mapStateToProps = state => {
-  return {
-    users: state.users,
-  };
-};
 
-const mapDispatchToProps = {
-  logOut,
-};
-
-export default connect (mapStateToProps, mapDispatchToProps) (Header);
+export default Header;

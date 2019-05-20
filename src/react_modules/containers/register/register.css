@@ -2,10 +2,13 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 100px;
   background-color: white;
   border-radius: 20px;
   padding: 50px;
+}
+
+.input-group{
+  z-index: 1;
 }
 .check-label-is-invalid{
  
@@ -24,20 +27,12 @@
 ._center {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  width: 100%;
+  margin-top: 30px;
 }
 .btn {
   border: 0px;
   border-radius: 20px;
-}
-
-._gradient-pink-perple {
-  background: linear-gradient(0.25turn, #c33764, #1d2671);
-}
-._gradient-pink-perple-text {
-  background: linear-gradient(0.25turn, #c33764, #1d2671);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 @media (max-width: 481px) {
   /*Эти стили применятся на экранах шириной менее 481px */

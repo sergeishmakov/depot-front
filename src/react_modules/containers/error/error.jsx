@@ -6,12 +6,7 @@ import './error.css';
 
 class Home extends Component {
   render () {
-    return (
-      <Main>
-        <h1>Error page</h1>
-
-      </Main>
-    );
+    return <h1>Error page</h1>;
   }
 }
 export default Home;

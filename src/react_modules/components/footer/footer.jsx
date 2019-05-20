@@ -1,9 +1,15 @@
-
-import React from 'react';
+import React, {Component, Fragment} from 'react';
 import './footer.css';
 
 const Footer = () => (
-  <div className="footer">Footer</div>
+  <Fragment>
+    {/* <hr className="footer-line" /> */}
+    <div className="footer">
+      <p className="footer-text">
+        Created by Shmakov
+      </p>
+    </div>
+  </Fragment>
 );
 
 export default Footer;
