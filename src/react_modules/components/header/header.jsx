@@ -1,23 +1,25 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+
 import './header.css';
 
-const Header = () => (
+const Header = ({onVisibleLoginForm, onLogOut, user}) => (
   <header className="header">
-    <nav>
-      <ul className="nav">
-        <li><NavLink exact to="/">Home</NavLink></li>
-        <li><NavLink to="/users">Users</NavLink></li>
-
-      </ul>
+    <nav className="nav-menu">
+      <NavLink exact to="/">Home</NavLink>
+      <NavLink to="/users">Users</NavLink>
     </nav>
-    <div>
-      <ul>
-        <li><NavLink to="/login">Sign In</NavLink></li>
-        <li><NavLink to="/register">Sign Up</NavLink></li>
-        <li><NavLink to="/logout">Sign Out</NavLink></li>
-      </ul>
-    </div>
+
+    <nav className="nav-user-panel">
+      {user &&
+        <p className="nav-user-panel_hello">
+          Hello, {user.firstName || 'Friend'}
+        </p>}
+      {!user && <button onClick={onVisibleLoginForm}>Sign In</button>}
+      {!user && <NavLink to="/register">Sign Up</NavLink>}
+      {user && <button onClick={onLogOut}>Sign Out</button>}
+    </nav>
   </header>
 );
+
 export default Header;

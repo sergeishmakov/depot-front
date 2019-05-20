@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-
+/src/react_modules/config.js
 # production
 /build
 

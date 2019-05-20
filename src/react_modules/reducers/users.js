@@ -1,4 +1,4 @@
-import {CREATE_USER_SUCCESS, CREATE_USER_FAILURE} from '../../constants';
+import { CREATE_USER_SUCCESS, CREATE_USER_FAILURE } from '../../constants';
 
 const initialState = [];
 
@@ -9,6 +9,7 @@ const users = (state = initialState, action) => {
 
     case CREATE_USER_FAILURE:
       return action.payload;
+
     default:
       return state;
   }
