@@ -1,54 +1,49 @@
-.register-wrapper{
+.register-wrapper {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  background-color: white;
+  align-items: center;
   border-radius: 20px;
   padding: 50px;
+  width: 100%;
 }
-
-.input-group{
-  z-index: 1;
-}
-.check-label-is-invalid{
- 
-  color: #dc3545;
-}
-.check-label-is-valid{
- 
-  color: #28a745;
-}
-.error-feedback {
-  color: #dc3545;
-  font-size: 16pt;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-._center {
+.register-form {
+  width: 60%;
+  padding: 30px;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin-top: 30px;
+  align-items: center;
 }
-.btn {
-  border: 0px;
-  border-radius: 20px;
+
+.register-btn {
+  width: 200px;
 }
+
+
 @media (max-width: 481px) {
-  /*Эти стили применятся на экранах шириной менее 481px */
-  main{
-    padding: 0px;
-  }
   .register-wrapper {
     border-radius: 0px;
     margin: 0px;
+    padding: 50px 0 0 0;
   }
+  .register-form {
+    width: 100%;
   }
-  @media (min-width: 481px) and (max-width: 768px) {
-  /*Эти применятся на экранах более 481px и менее 768px */
-  
+}
+
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .register-wrapper {
+    border-radius: 0px;
+    margin: 0;
+    padding: 50px 0 0 0;
   }
-  @media (min-width: 768px) {
-  /* Эти стили применятся на экранах шириной более 768px */
-  
+  .register-form {
+    width: 80%;
   }
+}
+
+@media (min-width: 769px) and (max-width: 1280px) {
+  .register-form {
+    width: 80%;
+  }
+}

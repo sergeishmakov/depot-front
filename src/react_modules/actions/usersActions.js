@@ -26,6 +26,7 @@ export const addUser = data => async dispatch => {
           message: 'User alredy exist',
         },
   });
+  return created;
 };
 export const logOut = data => async dispatch => {
   dispatch ({
