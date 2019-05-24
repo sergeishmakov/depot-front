@@ -1,24 +1,41 @@
-import React from 'react';
-import {NavLink} from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-import './header.css';
+import "./header.css";
 
-const Header = ({onVisibleLoginForm, onLogOut, user}) => (
+const Header = ({ onVisibleLoginForm, onLogOut, user }) => (
   <header className="header">
-    <nav className="nav-menu">
-      <NavLink exact to="/">Home</NavLink>
-      <NavLink to="/users">Users</NavLink>
-    </nav>
+    <div className="menu">
+      <NavLink className="menu-link" exact to="/">
+        Home
+      </NavLink>
+      <NavLink className="menu-link" to="/users">
+        Users
+      </NavLink>
+    </div>
 
-    <nav className="nav-user-panel">
-      {user &&
-        <p className="nav-user-panel_hello">
-          Hello, {user.firstName || 'Friend'}
-        </p>}
-      {!user && <button onClick={onVisibleLoginForm}>Sign In</button>}
-      {!user && <NavLink to="/register">Sign Up</NavLink>}
-      {user && <button onClick={onLogOut}>Sign Out</button>}
-    </nav>
+    <div className="userpanel">
+      {user && (
+        <p className="userpanel-hello">
+          Hello, <a href={"/profile"}>{user.firstName || "Friend"}</a>{" "}
+        </p>
+      )}
+      {!user && (
+        <button className="userpanel-btn" onClick={onVisibleLoginForm}>
+          Sign In
+        </button>
+      )}
+      {!user && (
+        <NavLink className="userpanel-btn" to="/register">
+          Sign Up
+        </NavLink>
+      )}
+      {user && (
+        <button className="userpanel-btn" onClick={onLogOut}>
+          Sign Out
+        </button>
+      )}
+    </div>
   </header>
 );
 

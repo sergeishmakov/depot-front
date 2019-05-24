@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Kodchasan', sans-serif;
+  font-family: "Kodchasan", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(0.25turn, #c33764, #1d2671);
@@ -14,13 +14,22 @@ code {
 .btn {
   outline: none;
   color: white;
-  margin: 30px 0 0 0;
-  padding: 0 20px 0 20px;
-  height: 40px;
-  border-radius: 20px;
+  margin: 2em 0 0 0;
+  padding: 0.6em 3em 0.6em 3em;
+  border-radius: 3em;
   border: 0px;
   background: linear-gradient(0.25turn, #c33764, #1d2671);
+  font-size: 14pt;
 }
+.btn:hover {
+  background: linear-gradient(0.25turn, #fd4982, #3847cf);
+}
+.btn:active,
+.btn:visited {
+  font-size: 12pt;
+  margin: 2.5em 0 0.25em 0;
+}
+
 .btn:disabled {
   background: linear-gradient(0.25turn, #a37f8b, #575a79);
 }
@@ -85,14 +94,14 @@ a {
   color: rgb(85, 84, 84);
   text-decoration: none;
 }
-a:hover{
+a:hover {
   color: #c33764;
 }
 
 ._gradient-pink-perple {
   background: linear-gradient(0.25turn, #c33764, #1d2671);
 }
-._gradient-pink-perple-text{
+._gradient-pink-perple-text {
   background: linear-gradient(0.25turn, #c33764, #1d2671);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
