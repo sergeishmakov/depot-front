@@ -71,3 +71,9 @@ export const Button = styled.button`
     opacity: 0.5;
   }
 `;
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 0 30px 0;
+`;

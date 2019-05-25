@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Wrapper, LoginForm } from "./style-login";
+import { LoginForm } from "./style-login";
 import { Form } from "react-final-form";
-import { Title, Input, Group, Button } from "../../../style.js";
+import { Title, Input, Group, Button, Wrapper } from "../../../style.js";
 
 import { authorizationUser } from "../../actions/usersActions";
 
@@ -45,8 +45,7 @@ class Login extends Component {
               </Group>
               <Button
                 type="submit"
-                disabled={submitting || pristine || invalid}
-              >
+                disabled={submitting || pristine || invalid}>
                 Log In
               </Button>
             </LoginForm>

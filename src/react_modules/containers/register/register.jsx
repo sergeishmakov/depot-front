@@ -1,207 +1,117 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import validator from "validator";
-import classNames from "classnames";
-import { Title } from "../../../style.js";
+import { Form, Field } from "react-final-form";
+import { Title, Input, Group, Button } from "../../../style.js";
+import { RegisterForm, Wrapper } from "./style-register.js";
 import { addUser } from "../../actions/usersActions";
 
-import "./register.css";
-
 class Register extends Component {
-  state = {
-    email: "",
-    password: "",
-    confirmPassword: "",
-    firstName: "",
-    lastName: "",
-    isValidPassword: false,
-    isValidConfirmPassword: false,
-    isValidEmail: false,
-    agree: false
+  onSubmit = async values => {
+    await this.props
+      .addUser({
+        email: values.email,
+        password: values.password
+      })
+      .then(response => {
+        if (response) {
+          this.props.push("/");
+        }
+      });
   };
-  hundleChange = e => {
-    const { password, agree } = this.state;
-    const { id, value } = e.currentTarget;
-    if (id !== "agreeCheck") {
-      this.setState({ [id]: value });
-      switch (id) {
-        case "email":
-          this.setState({
-            isValidEmail: validator.isEmail(value) ? true : false
-          });
-          break;
-        case "password":
-          this.setState({
-            isValidPassword: value.length >= 5 ? true : false
-          });
-          break;
-        case "confirmPassword":
-          this.setState({
-            isValidConfirmPassword:
-              value === password && value.length >= 5 ? true : false
-          });
-          break;
-        default:
-          return null;
-      }
-    } else {
-      this.setState({ agree: !agree });
+  validate = values => {
+    const errors = {};
+    if (!values.email) {
+      errors.email = "Required";
     }
-  };
-  registerUser = async e => {
-    e.preventDefault();
-    const { email, lastName, firstName, password } = this.state;
-    const user = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password
-    };
-    this.props.addUser(user).then(response => {
-      if (response.created) this.props.history.push("/");
-    });
-  };
-  validate = () => {
-    const {
-      isValidEmail,
-      isValidPassword,
-      isValidConfirmPassword,
-      agree
-    } = this.state;
-    if (isValidEmail && isValidConfirmPassword && isValidPassword && agree) {
-      return true;
-    } else {
-      return false;
+    if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(values.email)) {
+      errors.email = "invalid email";
     }
+    if (!values.password) {
+      errors.password = "Required";
+    }
+    if ((values.password || []).length < 5) {
+      errors.password = "Password is too short";
+    }
+    if (!values.confirm) {
+      errors.confirm = "Required";
+    }
+    if (values.confirm !== values.password) {
+      errors.confirm = "Does not match";
+    }
+    return Object.keys(errors).length ? errors : "";
   };
 
   render() {
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      agree,
-      confirmPassword,
-      isValidPassword,
-      isValidConfirmPassword,
-      isValidEmail
-    } = this.state;
-    const { users } = this.props;
     return (
-      <Fragment>
-        <div className="register-wrapper">
-          <Title>Registration form</Title>
-          <form className="register-form">
-            <div className="form-group">
-              <label htmlFor="firstName">Enter your first name:</label>
-              <input
-                id="firstName"
-                type="text"
-                value={firstName}
-                className={classNames("form-input", {
-                  "_is-valid-input": firstName
-                })}
-                onChange={this.hundleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="lastName">Enter your last name:</label>
-              <input
-                id="lastName"
-                type="text"
-                value={lastName}
-                className={classNames("form-input", {
-                  "_is-valid-input": lastName
-                })}
-                onChange={this.hundleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Enter email address:</label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                className={classNames(
-                  "form-input",
-                  { "_is-valid-input": email && isValidEmail },
-                  { "_is-invalid-input": email && !isValidEmail }
-                )}
-                onChange={this.hundleChange}
-              />
-              {email && !isValidEmail && (
-                <div className="invalid-feedback">Invalid email address</div>
-              )}
-              {users.error && (
-                <div className="invalid-feedback">User already exist!</div>
-              )}
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Enter password: </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                className={classNames(
-                  "form-input",
-                  { "_is-valid-input": password && isValidPassword },
-                  { "_is-invalid-input": password && !isValidPassword }
-                )}
-                onChange={this.hundleChange}
-              />
-              {password && !isValidPassword && (
-                <div className="invalid-feedback">Invalid password</div>
-              )}
-            </div>
-            <div className="form-group">
-              <label htmlFor="confirmPassword">Enter confirm password:</label>
-              <input
-                id="confirmPassword"
-                type="password"
-                value={confirmPassword}
-                className={classNames(
-                  "form-input",
-                  {
-                    "_is-valid-input": confirmPassword && isValidConfirmPassword
-                  },
-                  {
-                    "_is-invalid-input":
-                      confirmPassword && !isValidConfirmPassword
-                  }
-                )}
-                onChange={this.hundleChange}
-              />
-              {confirmPassword && !isValidConfirmPassword && (
-                <div className="invalid-feedback">
-                  Passwords is do not match
-                </div>
-              )}
-            </div>
-            <div className="form-group">
-              <label
-                className={classNames("check-label", {
-                  "_is-valid-text": agree
-                })}
-              >
-                <input
-                  id="agreeCheck"
-                  onChange={this.hundleChange}
-                  type="checkbox"
-                />{" "}
-                I accept the terms of Service
-              </label>
-            </div>
-            <button
-              disabled={!this.validate()}
-              className="btn register-btn"
-              onClick={this.registerUser}
-            >
-              Sign Up
-            </button>
-          </form>
-        </div>
-      </Fragment>
+      <Wrapper>
+        <Title>Sign Up</Title>
+        <Form
+          onSubmit={this.onSubmit}
+          validate={this.validate}
+          render={({
+            handleSubmit,
+            form,
+            submitting,
+            pristine,
+            validating,
+            values,
+            valid,
+            invalid
+          }) => (
+            <RegisterForm onSubmit={handleSubmit}>
+              <Group>
+                <label>Enter email address:</label>
+                <Field name="email">
+                  {({ input, meta }) => (
+                    <div>
+                      <Input {...input} type="text" placeholder="Username" />
+                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                      {this.props.users.error && (
+                        <span>{this.props.users.message}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+              </Group>
+              <Group>
+                <label>Enter password:</label>
+                <Field name="password">
+                  {({ input, meta }) => (
+                    <div>
+                      <Input
+                        {...input}
+                        type="password"
+                        placeholder="Password"
+                      />
+                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                    </div>
+                  )}
+                </Field>
+              </Group>
+
+              <Group>
+                <label>Enter confirm password:</label>
+                <Field name="confirm">
+                  {({ input, meta }) => (
+                    <div>
+                      <Input
+                        {...input}
+                        type="password"
+                        placeholder="Confirm password"
+                      />
+                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                    </div>
+                  )}
+                </Field>
+              </Group>
+
+              <Button type="submit" disabled={submitting || invalid}>
+                Sign Up
+              </Button>
+            </RegisterForm>
+          )}
+        />
+      </Wrapper>
     );
   }
 }

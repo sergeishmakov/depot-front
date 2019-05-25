@@ -24,6 +24,8 @@ export const Link = styled.a`
   color: rgba(255, 255, 255, 0.5);
 
   :hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
     border-bottom: 2px solid #3ac72a;
   }
 `;
