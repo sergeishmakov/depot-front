@@ -6,59 +6,60 @@ import {
   AUTENTICATE_USER_SUCCESS,
   AUTENTICATE_USER_FAILURE,
   LOGOUT_USER_SUCCESS,
-  LOGOUT_USER_FAILURE,
-} from '../../constants';
+  LOGOUT_USER_FAILURE
+} from "../../constants";
 import {
   userCreateApi,
   authorizationApi,
   autenticateApi,
-  logOutApi,
-} from '../api/usersApi';
+  logOutApi
+} from "../api/usersApi";
 
 export const addUser = data => async dispatch => {
-  const [user, created] = await userCreateApi (data);
-  dispatch ({
+  const [user, created] = await userCreateApi(data);
+  dispatch({
     type: created ? CREATE_USER_SUCCESS : CREATE_USER_FAILURE,
     payload: created
       ? user
       : {
           error: true,
-          message: 'User alredy exist',
-        },
+          message: "User alredy exist"
+        }
   });
   return created;
 };
 export const logOut = data => async dispatch => {
-  dispatch ({
+  dispatch({
     type: CREATE_USER_SUCCESS || CREATE_USER_FAILURE,
-    payload: {},
+    payload: {}
   });
 };
 export const authorizationUser = data => async dispatch => {
-  const [err, user, message] = await authorizationApi (data);
-  dispatch ({
-    type: user ? LOGIN_USER_SUCCESS : LOGIN_USER_FAILURE,
-    payload: user
-      ? user
+  const response = await authorizationApi(data);
+  dispatch({
+    type: response.user ? LOGIN_USER_SUCCESS : LOGIN_USER_FAILURE,
+    payload: response.user
+      ? response.user
       : {
-          error: err,
-          message: message,
-        },
+          error: response.err,
+          message: response.message
+        }
   });
+  return response;
 };
 
 export const autenticateUser = () => async dispatch => {
-  const user = await autenticateApi ();
-  dispatch ({
+  const user = await autenticateApi();
+  dispatch({
     type: user ? AUTENTICATE_USER_SUCCESS : AUTENTICATE_USER_FAILURE,
-    payload: user ? user : [],
+    payload: user ? user : []
   });
 };
 
 export const logoutUser = () => async dispatch => {
-  const res = await logOutApi ();
-  dispatch ({
+  const res = await logOutApi();
+  dispatch({
     type: res ? LOGOUT_USER_SUCCESS : LOGOUT_USER_FAILURE,
-    payload: [],
+    payload: []
   });
 };

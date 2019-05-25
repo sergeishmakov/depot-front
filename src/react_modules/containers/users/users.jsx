@@ -1,12 +1,12 @@
-import React, {Component, Fragment} from 'react';
-
-import './users.css';
+import React, { Component, Fragment } from "react";
+import { Title } from "../../../style.js";
+import "./users.css";
 
 class Home extends Component {
-  render () {
+  render() {
     return (
       <Fragment>
-        <h1>Users page</h1>
+        <Title>Users page</Title>
       </Fragment>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import validator from "validator";
 import classNames from "classnames";
-
+import { Title } from "../../../style.js";
 import { addUser } from "../../actions/usersActions";
 
 import "./register.css";
@@ -62,13 +62,18 @@ class Register extends Component {
     });
   };
   validate = () => {
-    const { isValidEmail, isValidPassword, isValidConfirmPassword, agree } = this.state;
-    if(isValidEmail && isValidConfirmPassword && isValidPassword && agree){
+    const {
+      isValidEmail,
+      isValidPassword,
+      isValidConfirmPassword,
+      agree
+    } = this.state;
+    if (isValidEmail && isValidConfirmPassword && isValidPassword && agree) {
       return true;
-    }else{
+    } else {
       return false;
     }
-  }
+  };
 
   render() {
     const {
@@ -86,8 +91,8 @@ class Register extends Component {
     return (
       <Fragment>
         <div className="register-wrapper">
-          <h2 className="_gradient-pink-perple-text">Registration form</h2>
-          <form className="register-form" >
+          <Title>Registration form</Title>
+          <form className="register-form">
             <div className="form-group">
               <label htmlFor="firstName">Enter your first name:</label>
               <input
@@ -174,9 +179,26 @@ class Register extends Component {
               )}
             </div>
             <div className="form-group">
-            <label className = {classNames("check-label", {"_is-valid-text": agree})}><input id ="agreeCheck" onChange={this.hundleChange} type="checkbox"/> I accept the terms of Service</label>
+              <label
+                className={classNames("check-label", {
+                  "_is-valid-text": agree
+                })}
+              >
+                <input
+                  id="agreeCheck"
+                  onChange={this.hundleChange}
+                  type="checkbox"
+                />{" "}
+                I accept the terms of Service
+              </label>
             </div>
-            <button disabled ={!this.validate()} className="btn register-btn" onClick={this.registerUser} >Sign Up</button>
+            <button
+              disabled={!this.validate()}
+              className="btn register-btn"
+              onClick={this.registerUser}
+            >
+              Sign Up
+            </button>
           </form>
         </div>
       </Fragment>

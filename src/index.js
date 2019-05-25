@@ -6,6 +6,7 @@ import store from "./react_modules/store";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import Catalog from "./react_modules/containers/catalog/catalog";
 import Users from "./react_modules/containers/users/users";

@@ -1,42 +1,38 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { Fragment } from "react";
+import { Modal, Navbar, Nav } from "react-bootstrap";
+import Login from "../../containers/login/login";
+import { Button, HelloUser, Link } from "./style-header.js";
 
-import "./header.css";
+const Header = ({
+  handleShow,
+  onLogOut,
+  user,
+  handleClose,
+  show,
+  authorizationUser
+}) => (
+  <Fragment>
+    <Modal show={show} onHide={handleClose}>
+      <Login handleClose={handleClose} />
+    </Modal>
 
-const Header = ({ onVisibleLoginForm, onLogOut, user }) => (
-  <header className="header">
-    <div className="menu">
-      <NavLink className="menu-link" exact to="/">
-        Home
-      </NavLink>
-      <NavLink className="menu-link" to="/users">
-        Users
-      </NavLink>
-    </div>
-
-    <div className="userpanel">
-      {user && (
-        <p className="userpanel-hello">
-          Hello, <a href={"/profile"}>{user.firstName || "Friend"}</a>{" "}
-        </p>
-      )}
-      {!user && (
-        <button className="userpanel-btn" onClick={onVisibleLoginForm}>
-          Sign In
-        </button>
-      )}
-      {!user && (
-        <NavLink className="userpanel-btn" to="/register">
-          Sign Up
-        </NavLink>
-      )}
-      {user && (
-        <button className="userpanel-btn" onClick={onLogOut}>
-          Sign Out
-        </button>
-      )}
-    </div>
-  </header>
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar.Brand href="/">DEPOT</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link href="/">Catalog</Nav.Link>
+          <Nav.Link href="/users">Users</Nav.Link>
+        </Nav>
+        <Nav>
+          <HelloUser href="/profile">{user.firstName || "Friend"} </HelloUser>
+          {!user && <Button onClick={handleShow}>Sign In</Button>}
+          {!user && <Link href="/register">Sign Up</Link>}
+          {user && <Button onClick={onLogOut}>Sign Out</Button>}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  </Fragment>
 );
 
 export default Header;

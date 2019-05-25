@@ -1,43 +1,45 @@
-import React, {Fragment, Component} from 'react';
-import {connect} from 'react-redux';
-import Main from './components/main/main';
-import Header from './components/header/header';
-import Footer from './components/footer/footer';
-import Login from './containers/login/login';
-import {autenticateUser, logoutUser} from './actions/usersActions';
+import React, { Fragment, Component } from "react";
+import { connect } from "react-redux";
+import Main from "./components/main/main";
+import Header from "./components/header/header";
+import Footer from "./components/footer/footer";
+import { autenticateUser, logoutUser } from "./actions/usersActions";
 
 class App extends Component {
   state = {
-    visible: false,
+    show: false
   };
-  onVisibleLoginForm = e => {
-    e.preventDefault ();
-    this.setState ({visible: true});
+  handleShow = () => {
+    this.setState({ show: true });
   };
-  onClickBackground = e => {
-    this.setState ({visible: false});
+  handleClose = () => {
+    this.setState({ show: false });
   };
   onLogOut = () => {
-    this.props.logoutUser ();
+    this.props.logoutUser();
   };
-  componentWillMount () {
-    this.props.autenticateUser ();
+  componentWillMount() {
+    this.props.autenticateUser();
   }
-  render () {
+  authorization = () => {
+    this.props.authorizationUser().then(response => {
+      if (response.user) this.props.history.push("/");
+    });
+  };
+  render() {
+    const { show } = this.state;
+
     return (
       <Fragment>
         <Header
-          onVisibleLoginForm={this.onVisibleLoginForm}
+          show={show}
+          handleShow={this.handleShow}
           user={this.props.users.email ? this.props.users : false}
           onLogOut={this.onLogOut}
+          handleClose={this.handleClose}
         />
-        {this.state.visible &&
-          <div onClick={this.onClickBackground} className="background" />}
-        {this.state.visible &&
-          <Login onClickBackground={this.onClickBackground} />}
-        <Main>
-          {this.props.children}
-        </Main>
+
+        <Main>{this.props.children}</Main>
         <Footer />
       </Fragment>
     );
@@ -46,13 +48,16 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.users,
+    users: state.users
   };
 };
 
 const mapDispatchToProps = {
   autenticateUser,
-  logoutUser,
+  logoutUser
 };
 
-export default connect (mapStateToProps, mapDispatchToProps) (App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

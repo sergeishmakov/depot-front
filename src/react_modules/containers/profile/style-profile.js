@@ -3,17 +3,14 @@ import styled from "styled-components";
 export const EditButton = styled.a`
   justify-self: center;
   align-self: center;
-  margin-left: auto;
-  margin-right: 50px;
 `;
 export const Title = styled.h1`
   justify-self: center;
-  margin-left: auto;
 `;
 export const ProfileHead = styled.div`
   width: 100%;
   display: flex;
-  flex-flow: row nowrap;
+  justify-content: space-around;
 `;
 export const Wrapper = styled.section`
   display: flex;

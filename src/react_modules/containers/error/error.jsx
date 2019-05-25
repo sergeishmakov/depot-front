@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-
-import './error.css';
+import React, { Component } from "react";
+import { Title } from "../../../style.js";
+import "./error.css";
 
 class Home extends Component {
-  render () {
-    return <h1>Error page</h1>;
+  render() {
+    return <Title>Error page</Title>;
   }
 }
 export default Home;

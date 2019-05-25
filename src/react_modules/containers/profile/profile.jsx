@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { Title } from "../../../style.js";
 import {
   Wrapper,
   Blocks,
@@ -7,7 +8,6 @@ import {
   Photo,
   Line,
   ProfileHead,
-  Title,
   EditButton
 } from "./style-profile";
 
@@ -17,6 +17,7 @@ class Profile extends Component {
       <Fragment>
         <Wrapper>
           <ProfileHead>
+            <Title />
             <Title> Profile</Title>
             <EditButton href="/edit-profile">Edit</EditButton>
           </ProfileHead>
