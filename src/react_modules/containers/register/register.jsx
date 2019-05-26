@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
-import { Title, Input, Group, Button } from "../../../style.js";
+import { Title, Input, Group, Button, Label } from "../../../style.js";
 import { RegisterForm, Wrapper } from "./style-register.js";
 import { addUser } from "../../actions/usersActions";
+import { Error } from "../../components/errorfield/errorfield.js";
 
 class Register extends Component {
   onSubmit = async values => {
@@ -24,7 +25,7 @@ class Register extends Component {
       errors.email = "Required";
     }
     if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(values.email)) {
-      errors.email = "invalid email";
+      errors.email = "Invalid email address";
     }
     if (!values.password) {
       errors.password = "Required";
@@ -59,51 +60,42 @@ class Register extends Component {
             invalid
           }) => (
             <RegisterForm onSubmit={handleSubmit}>
-              <Group>
-                <label>Enter email address:</label>
-                <Field name="email">
-                  {({ input, meta }) => (
-                    <div>
-                      <Input {...input} type="text" placeholder="Username" />
-                      {meta.error && meta.touched && <span>{meta.error}</span>}
-                      {this.props.users.error && (
-                        <span>{this.props.users.message}</span>
-                      )}
-                    </div>
-                  )}
-                </Field>
-              </Group>
-              <Group>
-                <label>Enter password:</label>
-                <Field name="password">
-                  {({ input, meta }) => (
-                    <div>
-                      <Input
-                        {...input}
-                        type="password"
-                        placeholder="Password"
-                      />
-                      {meta.error && meta.touched && <span>{meta.error}</span>}
-                    </div>
-                  )}
-                </Field>
-              </Group>
+              <Field name="email">
+                {({ input, meta }) => (
+                  <Group>
+                    <Label>Enter email address:</Label>
+                    <Input {...input} type="text" placeholder="Username" />
+                    {meta.error && meta.touched && <Error>{meta.error}</Error>}
+                    {this.props.users.error && (
+                      <span>{this.props.users.message}</span>
+                    )}
+                  </Group>
+                )}
+              </Field>
 
-              <Group>
-                <label>Enter confirm password:</label>
-                <Field name="confirm">
-                  {({ input, meta }) => (
-                    <div>
-                      <Input
-                        {...input}
-                        type="password"
-                        placeholder="Confirm password"
-                      />
-                      {meta.error && meta.touched && <span>{meta.error}</span>}
-                    </div>
-                  )}
-                </Field>
-              </Group>
+              <Field name="password">
+                {({ input, meta }) => (
+                  <Group>
+                    <Label>Enter password:</Label>
+                    <Input {...input} type="password" placeholder="Password" />
+                    {meta.error && meta.touched && <Error>{meta.error}</Error>}
+                  </Group>
+                )}
+              </Field>
+
+              <Field name="confirm">
+                {({ input, meta }) => (
+                  <Group>
+                    <Label>Enter confirm password:</Label>
+                    <Input
+                      {...input}
+                      type="password"
+                      placeholder="Confirm password"
+                    />
+                    {meta.error && meta.touched && <Error>{meta.error}</Error>}
+                  </Group>
+                )}
+              </Field>
 
               <Button type="submit" disabled={submitting || invalid}>
                 Sign Up

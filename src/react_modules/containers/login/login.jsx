@@ -2,16 +2,20 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { LoginForm } from "./style-login";
 import { Form } from "react-final-form";
-import { Title, Input, Group, Button, Wrapper } from "../../../style.js";
-
+import { Title, Input, Group, Button, Wrapper, Label } from "../../../style.js";
+import { Error } from "../../components/errorfield/errorfield.js";
 import { authorizationUser } from "../../actions/usersActions";
 
 class Login extends Component {
   onSubmit = async values => {
-    await this.props.authorizationUser(values);
-    window.location.reload();
+    await this.props.authorizationUser(values).then(response => {
+      if (response.user) {
+        window.location.reload();
+      }
+    });
   };
   render() {
+    const { users } = this.props;
     return (
       <Wrapper>
         <Title>Sign In</Title>
@@ -20,7 +24,7 @@ class Login extends Component {
           render={({ handleSubmit, submitting, pristine, invalid }) => (
             <LoginForm onSubmit={handleSubmit}>
               <Group>
-                <label>Enter email address:</label>
+                <Label>Enter email address:</Label>
                 <Input
                   name="email"
                   type="text"
@@ -29,9 +33,13 @@ class Login extends Component {
                   pattern="[a-z]*@[a-z]*\.[a-z]{2,}"
                   patternMismatch="Invalid email"
                 />
+                {console.log(users.user, " rrrrrrrrr", users.message)}
+                {!users.user && users.message === "email" && (
+                  <Error>User does not exist</Error>
+                )}
               </Group>
               <Group>
-                <label>Enter your password:</label>
+                <Label>Enter your password:</Label>
                 <Input
                   name="password"
                   type="password"
@@ -42,6 +50,9 @@ class Login extends Component {
                   pattern="[a-z0-9]*"
                   patternMismatch="Invalid password"
                 />
+                {!users.user && users.message === "password" && (
+                  <Error>Wrong password</Error>
+                )}
               </Group>
               <Button
                 type="submit"

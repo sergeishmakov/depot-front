@@ -11,7 +11,20 @@ export const Button = styled.button`
   display: inline-block;
   width: 100px;
   :hover {
-    border-bottom: 2px solid #3ac72a;
+    border-radius: 2em;
+    transition: 0.5s;
+    margin-bottom: 1px;
+    padding: 0 10px 0 10px;
+    border: 2px solid #3ac72a;
+  }
+  :visited {
+    outline: none;
+  }
+  :active {
+    outline: none;
+  }
+  :focus {
+    outline: none;
   }
 `;
 export const Link = styled.a`

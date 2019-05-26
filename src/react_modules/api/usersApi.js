@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import { API_BASE_URL } from "../config";
 
 const instance = axios.create({
@@ -12,22 +12,23 @@ export const userCreateApi = async user => {
 };
 
 export const authorizationApi = async user => {
-  const res = await instance.post (`login`, user, {
-    withCredentials: true,
+  const res = await instance.post(`login`, user, {
+    withCredentials: true
   });
+
   return res.data;
 };
 export const autenticateApi = async () => {
-  const res = await instance.get (`checkuser`, {
-    withCredentials: true,
+  const res = await instance.get(`checkuser`, {
+    withCredentials: true
   });
-  return JSON.parse (res.data);
+  return JSON.parse(res.data);
 };
 
 export const logOutApi = async () => {
   try {
-    await instance.get (`logout`, {
-      withCredentials: true,
+    await instance.get(`logout`, {
+      withCredentials: true
     });
     return true;
   } catch (err) {

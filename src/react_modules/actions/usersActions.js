@@ -17,49 +17,68 @@ import {
 
 export const addUser = data => async dispatch => {
   const [user, created] = await userCreateApi(data);
-  dispatch({
-    type: created ? CREATE_USER_SUCCESS : CREATE_USER_FAILURE,
-    payload: created
-      ? user
-      : {
-          error: true,
-          message: "User alredy exist"
-        }
-  });
+  if (created) {
+    dispatch({
+      type: CREATE_USER_SUCCESS,
+      payload: user
+    });
+  } else {
+    dispatch({
+      type: CREATE_USER_FAILURE,
+      payload: {
+        error: true,
+        message: "User alredy exist"
+      }
+    });
+  }
   return created;
 };
-export const logOut = data => async dispatch => {
-  dispatch({
-    type: CREATE_USER_SUCCESS || CREATE_USER_FAILURE,
-    payload: {}
-  });
-};
 export const authorizationUser = data => async dispatch => {
-  const response = await authorizationApi(data);
-  dispatch({
-    type: response.user ? LOGIN_USER_SUCCESS : LOGIN_USER_FAILURE,
-    payload: response.user
-      ? response.user
-      : {
-          error: response.err,
-          message: response.message
-        }
-  });
-  return response;
+  const [err, user, message] = await authorizationApi(data);
+  if (user) {
+    dispatch({
+      type: LOGIN_USER_SUCCESS,
+      payload: user
+    });
+  } else {
+    dispatch({
+      type: LOGIN_USER_FAILURE,
+      payload: {
+        error: err,
+        message: message
+      }
+    });
+  }
+
+  return { error: err, user: user, message: message };
 };
 
 export const autenticateUser = () => async dispatch => {
   const user = await autenticateApi();
-  dispatch({
-    type: user ? AUTENTICATE_USER_SUCCESS : AUTENTICATE_USER_FAILURE,
-    payload: user ? user : []
-  });
+  if (user) {
+    dispatch({
+      type: AUTENTICATE_USER_SUCCESS,
+      payload: user
+    });
+  } else {
+    dispatch({
+      type: AUTENTICATE_USER_FAILURE,
+      payload: []
+    });
+  }
 };
 
 export const logoutUser = () => async dispatch => {
   const res = await logOutApi();
-  dispatch({
-    type: res ? LOGOUT_USER_SUCCESS : LOGOUT_USER_FAILURE,
-    payload: []
-  });
+  if (res) {
+    dispatch({
+      type: LOGOUT_USER_SUCCESS,
+      payload: []
+    });
+  } else {
+    dispatch({
+      type: res ? LOGOUT_USER_SUCCESS : LOGOUT_USER_FAILURE,
+      payload: []
+    });
+  }
 };

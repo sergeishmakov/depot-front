@@ -3,14 +3,7 @@ import { Modal, Navbar, Nav } from "react-bootstrap";
 import Login from "../../containers/login/login";
 import { Button, HelloUser, Link } from "./style-header.js";
 
-const Header = ({
-  handleShow,
-  onLogOut,
-  user,
-  handleClose,
-  show,
-  authorizationUser
-}) => (
+const Header = ({ handleShow, onLogOut, user, handleClose, show }) => (
   <Fragment>
     <Modal show={show} onHide={handleClose}>
       <Login handleClose={handleClose} />
@@ -25,7 +18,9 @@ const Header = ({
           <Nav.Link href="/users">Users</Nav.Link>
         </Nav>
         <Nav>
-          <HelloUser href="/profile">{user.firstName || "Friend"} </HelloUser>
+          <HelloUser href={user ? "/profile" : "/register"}>
+            {user.firstName || "Friend"}{" "}
+          </HelloUser>
           {!user && <Button onClick={handleShow}>Sign In</Button>}
           {!user && <Link href="/register">Sign Up</Link>}
           {user && <Button onClick={onLogOut}>Sign Out</Button>}
