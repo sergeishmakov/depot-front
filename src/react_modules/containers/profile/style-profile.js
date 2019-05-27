@@ -1,22 +1,33 @@
 import styled from "styled-components";
+import React from "react";
+import { Title, Button } from "../../../style.js";
 
 export const EditButton = styled.a`
-  justify-self: center;
-  align-self: center;
+  border-radius: 0.5em;
+  background: #3790c3;
+  border: 0;
+  padding: 0 20px 0 20px;
+  color: white;
+  font-size: 16pt;
+  :hover {
+    text-decoration: none;
+    color: white;
+    opacity: 0.5;
+  }
+  :focus {
+    outline: none;
+  }
 `;
-export const Title = styled.h1`
-  justify-self: center;
+
+export const ProfileWrapper = styled.div`
+  width: 100%;
 `;
+
 export const ProfileHead = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-around;
-`;
-export const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  width: 100%;
+  justify-content: space-around;
 `;
 export const Blocks = styled.div`
   display: flex;

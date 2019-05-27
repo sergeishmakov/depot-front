@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
-import { Title } from "../../../style.js";
+import { Title, Input, Group, Button, Label } from "../../../style.js";
 import {
-  Wrapper,
+  ProfileWrapper,
   Blocks,
   FirstBlock,
   SecondBlock,
@@ -14,27 +14,25 @@ import {
 class Profile extends Component {
   render() {
     return (
-      <Fragment>
-        <Wrapper>
-          <ProfileHead>
-            <Title />
-            <Title> Profile</Title>
-            <EditButton href="/edit-profile">Edit</EditButton>
-          </ProfileHead>
-          <Blocks>
-            <FirstBlock>
-              <Photo />
-            </FirstBlock>
-            <SecondBlock>
-              <Line />
-              <Line />
-              <Line />
-              <Line />
-              <Line />
-            </SecondBlock>
-          </Blocks>
-        </Wrapper>
-      </Fragment>
+      <ProfileWrapper>
+        <ProfileHead>
+          <Title />
+          <Title> Profile</Title>
+          <EditButton href="/edit-profile">Edit profile</EditButton>
+        </ProfileHead>
+        <Blocks>
+          <FirstBlock>
+            <Photo />
+          </FirstBlock>
+          <SecondBlock>
+            <Line />
+            <Line />
+            <Line />
+            <Line />
+            <Line />
+          </SecondBlock>
+        </Blocks>
+      </ProfileWrapper>
     );
   }
 }

@@ -15,7 +15,7 @@ class Register extends Component {
       })
       .then(response => {
         if (response) {
-          this.props.push("/");
+          this.props.history.push("/");
         }
       });
   };
@@ -67,7 +67,7 @@ class Register extends Component {
                     <Input {...input} type="text" placeholder="Username" />
                     {meta.error && meta.touched && <Error>{meta.error}</Error>}
                     {this.props.users.error && (
-                      <span>{this.props.users.message}</span>
+                      <Error>{this.props.users.message}</Error>
                     )}
                   </Group>
                 )}

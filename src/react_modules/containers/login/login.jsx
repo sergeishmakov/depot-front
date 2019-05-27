@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { LoginForm } from "./style-login";
 import { Form } from "react-final-form";
+
 import { Title, Input, Group, Button, Wrapper, Label } from "../../../style.js";
 import { Error } from "../../components/errorfield/errorfield.js";
 import { authorizationUser } from "../../actions/usersActions";
@@ -10,7 +11,9 @@ class Login extends Component {
   onSubmit = async values => {
     await this.props.authorizationUser(values).then(response => {
       if (response.user) {
-        window.location.reload();
+        window.location.href.split("/").pop() === "register"
+          ? this.props.history.push("/")
+          : this.props.handleClose();
       }
     });
   };
@@ -56,7 +59,8 @@ class Login extends Component {
               </Group>
               <Button
                 type="submit"
-                disabled={submitting || pristine || invalid}>
+                disabled={submitting || pristine || invalid}
+              >
                 Log In
               </Button>
             </LoginForm>
