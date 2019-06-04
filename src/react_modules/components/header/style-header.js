@@ -57,9 +57,9 @@ const Hello = ({ className, children, href }) => (
 );
 
 export const HelloUser = styled(Hello)`
-  color: rgba(255, 255, 255, 0.5);
+  color: #2b5f25;
   :hover {
-    color: #2b5f25;
+    color: #3ac72a;
   }
 `;
 

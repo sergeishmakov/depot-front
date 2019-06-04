@@ -24,7 +24,8 @@ const input = ({
   minLength,
   pattern,
   patternMismatch,
-  tooShort
+  tooShort,
+  value
 }) => (
   <Field
     className={className}
@@ -83,4 +84,41 @@ export const Wrapper = styled.div`
 
 export const Label = styled.label`
   margin: 20px 0 0 0;
+`;
+
+export const Blocks = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  width: 100%;
+`;
+export const FirstBlock = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 50px 0 0 0;
+  width: 40%;
+`;
+export const SecondBlock = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin: 50px 0 0 0;
+  width: 60%;
+`;
+
+const Alert = styled.span`
+  padding: 10px 20px 10px 20px;
+  width: 80%;
+  border-radius: 5px;
+`;
+export const AlertInfo = styled(Alert)`
+  color: #9bcef5;
+  background: #e1f4ff;
+  border: 1px solid #b4e3fe;
+`;
+export const AlertSuccess = styled(Alert)`
+  color: #427c53;
+  background: #d3eedb;
+  border: 1px solid #e8f6eb;
 `;

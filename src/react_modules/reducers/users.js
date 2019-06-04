@@ -7,7 +7,9 @@ import {
   AUTENTICATE_USER_FAILURE,
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_FAILURE,
-} from '../../constants';
+  UPDATE_USER_FAILURE,
+  UPDATE_USER_SUCCESS
+} from "../../constants";
 
 const initialState = [];
 
@@ -35,6 +37,12 @@ const users = (state = initialState, action) => {
       return action.payload;
 
     case LOGOUT_USER_FAILURE:
+      return state;
+
+    case UPDATE_USER_SUCCESS:
+      return action.payload;
+
+    case UPDATE_USER_FAILURE:
       return state;
 
     default:

@@ -1,22 +1,32 @@
 import styled from "styled-components";
 import React from "react";
-import { Title, Button } from "../../../style.js";
+
+const value = ({ children, className }) =>
+  children ? (
+    <h3>{children} </h3>
+  ) : (
+    <h5>
+      <i>Unspecified</i>{" "}
+    </h5>
+  );
+export const FieldValue = styled(value)``;
 
 export const EditButton = styled.a`
   border-radius: 0.5em;
-  background: #3790c3;
   border: 0;
   padding: 0 20px 0 20px;
-  color: white;
+  color: #3790c3;
   font-size: 16pt;
   :hover {
-    text-decoration: none;
-    color: white;
     opacity: 0.5;
   }
   :focus {
     outline: none;
   }
+`;
+
+export const Paragraph = styled.p`
+  margin: 20px 0 0 0;
 `;
 
 export const ProfileWrapper = styled.div`
@@ -27,31 +37,18 @@ export const ProfileHead = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
-export const Blocks = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-`;
-export const FirstBlock = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 50px 0 0 0;
-  width: 50%;
-`;
-export const SecondBlock = styled.div`
+
+export const Photo = styled.div`
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  margin: 50px 0 0 0;
-  width: 50%;
-`;
-export const Photo = styled.img`
-  width: 100px;
-  height: 100px;
-  background: red;
+  align-items: center;
+  width: 200px;
+  height: 300px;
+  background: white;
+  border: 1px solid black;
+  margin-top: 40px;
 `;
 export const Line = styled.div`
   background: red;

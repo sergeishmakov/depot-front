@@ -6,13 +6,16 @@ import {
   AUTENTICATE_USER_SUCCESS,
   AUTENTICATE_USER_FAILURE,
   LOGOUT_USER_SUCCESS,
-  LOGOUT_USER_FAILURE
+  LOGOUT_USER_FAILURE,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILURE
 } from "../../constants";
 import {
   userCreateApi,
   authorizationApi,
   autenticateApi,
-  logOutApi
+  logOutApi,
+  saveChangesApi
 } from "../api/usersApi";
 
 export const addUser = data => async dispatch => {
@@ -77,8 +80,27 @@ export const logoutUser = () => async dispatch => {
     });
   } else {
     dispatch({
-      type: res ? LOGOUT_USER_SUCCESS : LOGOUT_USER_FAILURE,
+      type: LOGOUT_USER_FAILURE,
       payload: []
+    });
+  }
+};
+
+export const saveChanges = data => async dispatch => {
+  const [err, user, message] = await saveChangesApi(data);
+  console.log([err, user, message]);
+  if (user) {
+    dispatch({
+      type: UPDATE_USER_SUCCESS,
+      payload: user
+    });
+  } else {
+    dispatch({
+      type: UPDATE_USER_FAILURE,
+      payload: {
+        error: err,
+        message: message
+      }
     });
   }
 };

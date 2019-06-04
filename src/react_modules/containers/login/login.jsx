@@ -36,7 +36,6 @@ class Login extends Component {
                   pattern="[a-z]*@[a-z]*\.[a-z]{2,}"
                   patternMismatch="Invalid email"
                 />
-                {console.log(users.user, " rrrrrrrrr", users.message)}
                 {!users.user && users.message === "email" && (
                   <Error>User does not exist</Error>
                 )}

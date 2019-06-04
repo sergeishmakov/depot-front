@@ -19,7 +19,7 @@ const Header = ({ handleShow, onLogOut, user, handleClose, show }) => (
         </Nav>
         <Nav>
           <HelloUser href={user ? "/profile" : "/register"}>
-            {user.firstName || "Friend"}{" "}
+            {user.firstName || "Friend"}
           </HelloUser>
           {!user && <Button onClick={handleShow}>Sign In</Button>}
           {!user && <Link href="/register">Sign Up</Link>}

@@ -35,3 +35,9 @@ export const logOutApi = async () => {
     return false;
   }
 };
+export const saveChangesApi = async data => {
+  const res = await instance.post(`update`, data, {
+    withCredentials: true
+  });
+  return res.data;
+};

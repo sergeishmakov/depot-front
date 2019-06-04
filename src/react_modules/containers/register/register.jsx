@@ -5,6 +5,7 @@ import { Title, Input, Group, Button, Label } from "../../../style.js";
 import { RegisterForm, Wrapper } from "./style-register.js";
 import { addUser } from "../../actions/usersActions";
 import { Error } from "../../components/errorfield/errorfield.js";
+import { validating } from "../../middlewares/validate";
 
 class Register extends Component {
   onSubmit = async values => {
@@ -19,27 +20,9 @@ class Register extends Component {
         }
       });
   };
+
   validate = values => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = "Required";
-    }
-    if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(values.email)) {
-      errors.email = "Invalid email address";
-    }
-    if (!values.password) {
-      errors.password = "Required";
-    }
-    if ((values.password || []).length < 5) {
-      errors.password = "Password is too short";
-    }
-    if (!values.confirm) {
-      errors.confirm = "Required";
-    }
-    if (values.confirm !== values.password) {
-      errors.confirm = "Does not match";
-    }
-    return Object.keys(errors).length ? errors : "";
+    validating(values);
   };
 
   render() {
