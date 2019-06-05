@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Wrapper, EditedForm } from "./style-editprofile";
+import {
+  Wrapper,
+  EditedForm,
+  Photo,
+  PhotoWrap,
+  FileInput,
+  NotPhoto
+} from "./style-editprofile";
 import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
 import {
@@ -11,52 +18,88 @@ import {
   Input,
   Group,
   Button,
-  Label
+  Label,
+  EmptyAlert
 } from "../../../style.js";
 import { saveChanges } from "../../actions/usersActions";
+import { loadPhoto } from "../../api/usersApi";
 import { Error } from "../../components/errorfield/errorfield.js";
 import { validating } from "../../middlewares/validate";
-import { Photo } from "../profile/style-profile";
 class EditProfile extends Component {
+  state = {
+    statusUpdate: false,
+    localPhoto: "",
+    localPhotoName: ""
+  };
   onSubmit = async values => {
     let data = values;
     data.id = this.props.users.id;
+    if (this.state.localPhoto) {
+      data.localPhoto = this.state.localPhoto;
+      data.localPhotoName = this.state.localPhotoName;
+    }
     await this.props.saveChanges(data).then(response => {
-      if (response) {
-        this.props.history.push("/");
-      }
+      this.setState({ statusUpdate: response });
     });
   };
-
+  onChange = () => {
+    this.setState({ statusUpdate: false });
+  };
+  handleLoadImage = e => {
+    const file = e.currentTarget.files[0];
+    const reader = new FileReader();
+    reader.onload = (() => {
+      return e => {
+        this.setState({
+          localPhoto: e.target.result,
+          localPhotoName: file.name
+        });
+      };
+    })(file);
+    reader.readAsDataURL(file);
+  };
   validate = values => {
     validating(values);
   };
   render() {
     const { users } = this.props;
+    const { statusUpdate, localPhoto } = this.state;
     return (
       <Wrapper>
         <Blocks>
           <FirstBlock>
-            {users.photo ? (
-              <img src={users.photo} alt="" />
-            ) : (
-              <Photo>Not photo</Photo>
-            )}
+            <PhotoWrap>
+              {users.photo ? (
+                <Photo src={users.photo} alt="Not photo" />
+              ) : (
+                <NotPhoto>Not photo</NotPhoto>
+              )}
+            </PhotoWrap>
+            <FileInput
+              type="file"
+              onChange={this.handleLoadImage}
+              accept="image/*"
+            />
           </FirstBlock>
           <SecondBlock>
             <Title>Edit profile</Title>
-            <AlertSuccess> Changes successfully applied</AlertSuccess>
+            {statusUpdate ? (
+              <AlertSuccess> Changes successfully applied</AlertSuccess>
+            ) : (
+              <EmptyAlert>Empty</EmptyAlert>
+            )}
             <Form
+              onChange={this.onChange}
               onSubmit={this.onSubmit}
               validate={this.validate}
               initialValues={{
                 lastName: users.lastName,
                 firstName: users.firstName,
-                email: users.email,
                 phoneNumber: users.phoneNumber,
                 address: users.address
               }}
               render={({
+                onChange,
                 handleSubmit,
                 form,
                 submitting,
@@ -66,7 +109,7 @@ class EditProfile extends Component {
                 valid,
                 invalid
               }) => (
-                <EditedForm onSubmit={handleSubmit}>
+                <EditedForm onSubmit={handleSubmit} onChange={onChange}>
                   <Field name="firstName">
                     {({ input, meta }) => (
                       <Group>
@@ -97,24 +140,6 @@ class EditProfile extends Component {
                       </Group>
                     )}
                   </Field>
-                  {/* <Field name="email">
-                    {({ input, meta }) => (
-                      <Group>
-                        <Label>Email address:</Label>
-                        <Input
-                          {...input}
-                          type="text"
-                          placeholder="example: bean.green@example.com"
-                        />
-                        {meta.error && meta.touched && (
-                          <Error>{meta.error}</Error>
-                        )}
-                        {this.props.users.error && (
-                          <Error>{this.props.users.message}</Error>
-                        )}
-                      </Group>
-                    )}
-                  </Field> */}
                   <Field name="phoneNumber">
                     {({ input, meta }) => (
                       <Group>

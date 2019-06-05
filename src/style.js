@@ -111,6 +111,7 @@ const Alert = styled.span`
   padding: 10px 20px 10px 20px;
   width: 80%;
   border-radius: 5px;
+  margin: -10px -10px -10px -10px;
 `;
 export const AlertInfo = styled(Alert)`
   color: #9bcef5;
@@ -121,4 +122,10 @@ export const AlertSuccess = styled(Alert)`
   color: #427c53;
   background: #d3eedb;
   border: 1px solid #e8f6eb;
+`;
+export const EmptyAlert = styled(Alert)`
+  padding: 10px 20px 10px 20px;
+  width: 80%;
+  border-radius: 5px;
+  opacity: 0;
 `;

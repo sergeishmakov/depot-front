@@ -33,7 +33,7 @@ class Login extends Component {
                   type="text"
                   placeholder="Email Address"
                   maxLength={30}
-                  pattern="[a-z]*@[a-z]*\.[a-z]{2,}"
+                  pattern="[a-z.]*@[a-z]*\.[a-z]{2,}"
                   patternMismatch="Invalid email"
                 />
                 {!users.user && users.message === "email" && (

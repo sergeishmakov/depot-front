@@ -87,20 +87,17 @@ export const logoutUser = () => async dispatch => {
 };
 
 export const saveChanges = data => async dispatch => {
-  const [err, user, message] = await saveChangesApi(data);
-  console.log([err, user, message]);
-  if (user) {
+  const status = await saveChangesApi(data);
+  if (status) {
     dispatch({
       type: UPDATE_USER_SUCCESS,
-      payload: user
+      payload: data
     });
   } else {
     dispatch({
       type: UPDATE_USER_FAILURE,
-      payload: {
-        error: err,
-        message: message
-      }
+      payload: null
     });
   }
+  return status;
 };

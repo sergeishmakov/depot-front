@@ -8,9 +8,9 @@ import {
   AlertInfo
 } from "../../../style.js";
 
+import { PhotoWrap, NotPhoto, Photo } from "../editprofile/style-editprofile";
 import {
   ProfileWrapper,
-  Photo,
   ProfileHead,
   EditButton,
   Paragraph,
@@ -18,30 +18,28 @@ import {
 } from "./style-profile";
 
 class Profile extends Component {
+  state = {
+    localPhoto: ""
+  };
   check = () => {
-    const {
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-      address
-    } = this.props.users;
-    return firstName || lastName || email || phoneNumber || address
-      ? true
-      : false;
+    const { firstName, lastName, phoneNumber, address } = this.props.users;
+    return firstName && lastName && phoneNumber && address ? false : true;
   };
 
   render() {
     const { users } = this.props;
+    const { localPhoto } = this.state;
     return (
       <ProfileWrapper>
         <Blocks>
           <FirstBlock>
-            {users.photo ? (
-              <img src={users.photo} alt="" />
-            ) : (
-              <Photo>Not photo</Photo>
-            )}
+            <PhotoWrap>
+              {users.photo ? (
+                <Photo src={users.photo} alt="Not photo" />
+              ) : (
+                <NotPhoto>Not photo</NotPhoto>
+              )}
+            </PhotoWrap>
           </FirstBlock>
           <SecondBlock>
             <ProfileHead>
@@ -59,7 +57,7 @@ class Profile extends Component {
             <Paragraph>Email Address</Paragraph>
             <FieldValue>{users.email} </FieldValue>
             <Paragraph>Phone number</Paragraph>
-            <FieldValue>{users.ParagraphhoneNumber}</FieldValue>
+            <FieldValue>{users.phoneNumber}</FieldValue>
             <Paragraph>Address</Paragraph>
             <FieldValue>{users.address}</FieldValue>
           </SecondBlock>
