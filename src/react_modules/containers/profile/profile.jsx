@@ -28,7 +28,6 @@ class Profile extends Component {
 
   render() {
     const { users } = this.props;
-    const { localPhoto } = this.state;
     return (
       <ProfileWrapper>
         <Blocks>

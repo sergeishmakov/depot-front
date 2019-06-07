@@ -3,13 +3,15 @@ import React from "react";
 
 const value = ({ children, className }) =>
   children ? (
-    <h3>{children} </h3>
+    <h4 className={className}>{children} </h4>
   ) : (
-    <h3>
+    <h4 className={className}>
       <i>Unspecified</i>{" "}
-    </h3>
+    </h4>
   );
-export const FieldValue = styled(value)``;
+export const FieldValue = styled(value)`
+  color: grey;
+`;
 
 export const EditButton = styled.a`
   border-radius: 0.5em;

@@ -12,7 +12,7 @@ class Login extends Component {
     await this.props.authorizationUser(values).then(response => {
       if (response.user) {
         window.location.href.split("/").pop() === "register"
-          ? this.props.history.push("/")
+          ? (window.location = "/")
           : this.props.handleClose();
       }
     });

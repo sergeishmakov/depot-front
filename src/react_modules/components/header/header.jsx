@@ -15,14 +15,14 @@ const Header = ({ handleShow, onLogOut, user, handleClose, show }) => (
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="/">Catalog</Nav.Link>
-          <Nav.Link href="/users">Users</Nav.Link>
+          <Nav.Link href="/index/users">Users</Nav.Link>
         </Nav>
         <Nav>
-          <HelloUser href={user ? "/profile" : "/register"}>
-            {user.firstName || "Friend"}
+          <HelloUser href={user ? "/index/profile" : "/index/register"}>
+            {user.firstName || "Friend"} ({user.status || "guest"})
           </HelloUser>
           {!user && <Button onClick={handleShow}>Sign In</Button>}
-          {!user && <Link href="/register">Sign Up</Link>}
+          {!user && <Link href="/index/register">Sign Up</Link>}
           {user && <Button onClick={onLogOut}>Sign Out</Button>}
         </Nav>
       </Navbar.Collapse>

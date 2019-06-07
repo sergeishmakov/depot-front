@@ -22,7 +22,6 @@ import {
   EmptyAlert
 } from "../../../style.js";
 import { saveChanges } from "../../actions/usersActions";
-import { loadPhoto } from "../../api/usersApi";
 import { Error } from "../../components/errorfield/errorfield.js";
 import { validating } from "../../middlewares/validate";
 class EditProfile extends Component {
@@ -69,8 +68,8 @@ class EditProfile extends Component {
         <Blocks>
           <FirstBlock>
             <PhotoWrap>
-              {users.photo ? (
-                <Photo src={users.photo} alt="Not photo" />
+              {users.photo || localPhoto ? (
+                <Photo src={users.photo || localPhoto} alt="Not photo" />
               ) : (
                 <NotPhoto>Not photo</NotPhoto>
               )}
