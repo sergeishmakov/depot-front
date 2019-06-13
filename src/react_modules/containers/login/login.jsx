@@ -35,6 +35,7 @@ class Login extends Component {
                   maxLength={30}
                   pattern="[a-z.]*@[a-z]*\.[a-z]{2,}"
                   patternMismatch="Invalid email"
+                  required
                 />
                 {!users.user && users.message === "email" && (
                   <Error>User does not exist</Error>
@@ -51,6 +52,7 @@ class Login extends Component {
                   tooShort="Password is too short"
                   pattern="[a-z0-9]*"
                   patternMismatch="Invalid password"
+                  required
                 />
                 {!users.user && users.message === "password" && (
                   <Error>Wrong password</Error>

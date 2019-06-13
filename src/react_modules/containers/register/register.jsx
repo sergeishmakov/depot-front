@@ -47,7 +47,12 @@ class Register extends Component {
                 {({ input, meta }) => (
                   <Group>
                     <Label>Enter email address:</Label>
-                    <Input {...input} type="text" placeholder="Username" />
+                    <Input
+                      {...input}
+                      type="text"
+                      placeholder="Username"
+                      required
+                    />
                     {meta.error && meta.touched && <Error>{meta.error}</Error>}
                     {this.props.users.error && (
                       <Error>{this.props.users.message}</Error>
@@ -60,7 +65,12 @@ class Register extends Component {
                 {({ input, meta }) => (
                   <Group>
                     <Label>Enter password:</Label>
-                    <Input {...input} type="password" placeholder="Password" />
+                    <Input
+                      {...input}
+                      type="password"
+                      placeholder="Password"
+                      required
+                    />
                     {meta.error && meta.touched && <Error>{meta.error}</Error>}
                   </Group>
                 )}
@@ -74,6 +84,7 @@ class Register extends Component {
                       {...input}
                       type="password"
                       placeholder="Confirm password"
+                      required
                     />
                     {meta.error && meta.touched && <Error>{meta.error}</Error>}
                   </Group>

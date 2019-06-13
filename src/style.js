@@ -2,6 +2,32 @@ import styled from "styled-components";
 import React from "react";
 import { Field } from "react-final-form-html5-validation";
 
+export const buttondefault = `
+  background: white;
+  color: #2fbf50;
+  outline: none;
+  padding: 3px 5px 3px 5px;
+  border-radius: 0.5em;
+  font-size: 1.3em;
+  margin: 0;
+  border: 0px;
+  :hover {
+    outline: none;
+    background: #55cc70;
+    color: white;
+  }
+  :focus {
+    outline: none;
+  }
+  :active {
+    outline: none;
+  }
+  @media (max-width: 481px) {
+    font-size: 1em;
+    padding: 3px 1px 3px 1px;
+  }
+`;
+
 export const Title = styled.h1`
   background: linear-gradient(0.25turn, #3790c3, #3790c3);
   -webkit-background-clip: text;
@@ -25,7 +51,9 @@ const input = ({
   pattern,
   patternMismatch,
   tooShort,
-  value
+  value,
+  list,
+  required
 }) => (
   <Field
     className={className}
@@ -33,7 +61,7 @@ const input = ({
     component="input"
     type={type}
     placeholder={placeholder}
-    required
+    required={required ? true : false}
     maxLength={maxLength}
     minLength={minLength}
     pattern={pattern}
@@ -41,7 +69,27 @@ const input = ({
     tooShort={tooShort}
   />
 );
+
 export const Input = styled(input)`
+  outline: none;
+  background: transparant;
+  margin: 0 0 0 0;
+  border-radius: 0.5em;
+  border: 1px solid #858585;
+  width: 100%;
+  padding: 5px 20px 5px 10px;
+  :focus {
+    box-shadow: 0 0 3px #858585;
+  }
+`;
+
+const select = ({ children, className, name }) => (
+  <Field className={className} name={name} component="select" required>
+    {children}
+  </Field>
+);
+
+export const Select = styled(select)`
   outline: none;
   background: transparant;
   margin: 0 0 0 0;

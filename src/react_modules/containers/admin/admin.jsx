@@ -1,44 +1,55 @@
-import { connect } from "react-redux";
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Header, Main, Title, Link } from "./admin-style";
-import { getUsers } from "../../api/usersApi";
+import UsersList from "../../components/userlist/userlist";
+import ProductsList from "../../components/productslist/productslist";
 
 class Admin extends Component {
   state = {
-    users: []
+    usersVisible: true,
+    productsVisible: false
   };
-
-  componentWillMount() {
-    this.setState({ users: getUsers() });
-  }
-
+  handleClick = e => {
+    let list = e.currentTarget.name;
+    if (list === "users") {
+      this.setState({ usersVisible: true, productsVisible: false });
+    }
+    if (list === "products") {
+      this.setState({ usersVisible: false, productsVisible: true });
+    }
+    if (list === "home") {
+      window.location = "/";
+    }
+  };
   render() {
+    const { usersVisible, productsVisible } = this.state;
     return (
-      <Fragment>
+      <Main>
+        <Title>Admin page</Title>
         <Header>
-          <Link>Site</Link>
-          <Link>Users</Link>
-          <Link>Products</Link>
+          <Link name="home" onClick={this.handleClick}>
+            Site
+          </Link>
+          <Link
+            activeLink={usersVisible}
+            name="users"
+            onClick={this.handleClick}
+          >
+            Users
+          </Link>
+          <Link
+            activeLink={productsVisible}
+            name="products"
+            onClick={this.handleClick}
+          >
+            Products
+          </Link>
         </Header>
-        <Main>
-          <Title>Admin page</Title>
-          ____________________________________
-        </Main>
-      </Fragment>
+        <hr />
+        {usersVisible && <UsersList />}
+        {productsVisible && <ProductsList />}
+      </Main>
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    users: state.users
-  };
-};
 
-const mapDispatchToProps = {
-  getUsers
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Admin);
+export default Admin;

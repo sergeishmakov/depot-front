@@ -13,8 +13,8 @@ import Error from "./react_modules/containers/error/error";
 import Admin from "./react_modules/containers/admin/admin";
 import App from "./react_modules/App";
 
-const client = new ApolloClient({
-  uri: "https://api.graph.cool/simple/v1/ciyz901en4j590185wkmexyex"
+export const client = new ApolloClient({
+  uri: "http://localhost:3001/api"
 });
 
 ReactDOM.render(
