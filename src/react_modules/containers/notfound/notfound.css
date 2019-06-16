@@ -1,0 +1,13 @@
+.notfound {
+  width: 100%;
+  height: calc(100% + 400px);
+  position: absolute;
+  z-index: 99;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  top: -400px;
+  font-size: 30pt;
+}

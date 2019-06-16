@@ -5,12 +5,11 @@ import Main from "./components/main/main";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
 import { autenticateUser, logoutUser } from "./actions/usersActions";
-import Users from "./containers/users/users";
 import Register from "./containers/register/register";
-import Login from "./containers/login/login";
 import Profile from "./containers/profile/profile";
 import EditProfile from "./containers/editprofile/editprofile";
 import Catalog from "./containers/catalog/catalog";
+import { AdminBar, AdminLink } from "../style";
 
 class App extends Component {
   state = {
@@ -35,9 +34,14 @@ class App extends Component {
   };
   render() {
     const { show } = this.state;
-
+    const user = this.props.users;
     return (
       <Fragment>
+        {user.status === "admin" && (
+          <AdminBar>
+            <AdminLink href="/admin" />
+          </AdminBar>
+        )}
         <Header
           show={show}
           handleShow={this.handleShow}
@@ -47,14 +51,11 @@ class App extends Component {
         />
         <Main>
           <Switch>
-            <Route exact path="/index" component={Catalog} />
-            <Route path="/index/users" component={Users} />
-            <Route path="/index/profile" component={Profile} />
-            <Route path="/index/edit-profile" component={EditProfile} />
-            <Route path="/index/register" component={Register} />
-            <Route path="/index/login" component={Login} />
-            <Redirect to="/admin" />
-            <Redirect to="/error" />
+            <Route exact path="/depot" component={Catalog} />
+            <Route path="/depot/profile" component={Profile} />
+            <Route path="/depot/edit-profile" component={EditProfile} />
+            <Route path="/depot/register" component={Register} />
+            <Redirect to="/notfound" />
           </Switch>
         </Main>
         <Footer />

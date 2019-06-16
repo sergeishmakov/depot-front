@@ -43,7 +43,7 @@ class Profile extends Component {
           <SecondBlock>
             <ProfileHead>
               <Title> Profile</Title>
-              <EditButton href="/edit-profile">Edit profile</EditButton>
+              <EditButton href="/depot/edit-profile">Edit profile</EditButton>
               <Title />
             </ProfileHead>
             {this.check() && (

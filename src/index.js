@@ -9,7 +9,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 
-import Error from "./react_modules/containers/error/error";
+import NotFound from "./react_modules/containers/notfound/notfound";
 import Admin from "./react_modules/containers/admin/admin";
 import App from "./react_modules/App";
 
@@ -22,10 +22,10 @@ ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
-          <Redirect exact from="/" to="/index" />
-          <Route path="/index" component={App} />
+          <Redirect exact from="/" to="/depot" />
+          <Route path="/depot" component={App} />
           <Route path="/admin" component={Admin} />
-          <Route path="/error" component={Error} />
+          <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
     </Provider>

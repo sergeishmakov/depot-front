@@ -10,9 +10,9 @@ import {
   Select
 } from "../../../style.js";
 import { FormWrapper } from "./style-add-form";
-import { Error } from "../../components/errorfield/errorfield.js";
+import { FileInput } from "../../containers/editprofile/style-editprofile";
 
-const AddForm = ({ onSubmit }) => (
+const AddForm = ({ handleChangeSelect, handleLoadImage, onSubmit }) => (
   <Wrapper>
     <Title>Add product</Title>
     <Form
@@ -25,14 +25,26 @@ const AddForm = ({ onSubmit }) => (
           </Group>
           <Group>
             <Label>Select a category:</Label>
-            <Select name="category">
-              <option />
-              <option value="tv">TV</option>
-              <option value="smartphones"> Smartphones</option>
-              <option value="audio"> Audio</option>
-              <option value="computers">Computers and Notebooks </option>
-              <option value="photo-video">Photo and video </option>
+            <Select
+              onChange={handleChangeSelect}
+              component="select"
+              name="category"
+              required
+            >
+              <option value="TV">TV</option>
+              <option value="Smartphones"> Smartphones</option>
+              <option value="Audio"> Audio</option>
+              <option value="Computers and Notebooks">
+                {" "}
+                Computers and Notebooks{" "}
+              </option>
+              <option value="Photo and video"> Photo and video</option>
             </Select>
+          </Group>
+
+          <Group>
+            <Label>Price:</Label>
+            <Input name="price" type="number" placeholder="Price" required />
           </Group>
 
           <Group>
@@ -57,21 +69,22 @@ const AddForm = ({ onSubmit }) => (
 
           <Group>
             <Label>Year of issue:</Label>
-            <Input name="date" type="text" placeholder="Year" />
+            <Input name="date" type="text" placeholder="Year" required />
           </Group>
 
           <Group>
             <Label>Description:</Label>
             <Input
               name="description"
-              type="textarea"
+              component="textarea"
               placeholder="description"
+              required
             />
           </Group>
 
           <Group>
             <Label>Photo:</Label>
-            <Input name="photo" type="file" />
+            <FileInput onChange={handleLoadImage} type="file" required />
           </Group>
 
           <Button type="submit" disabled={submitting || pristine || invalid}>

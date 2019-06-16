@@ -40,16 +40,17 @@ export const AddBtn = styled.button`
   ${buttondefault};
 `;
 
-export const ProductName = styled.div`
-  text-decoration: underline;
-  background: ${props =>
-    Number(props.id.split("product")[1]) % 2 === 1 ? "#e3f7e6" : "#fff"};
-  font-size: 1.3em;
+export const RowProduct = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: ${props => (props.n % 2 === 0 ? "#e3f7e6" : "#b1dbbb")};
+
   color: black;
   padding: 10px;
   :hover {
     color: #235129;
-    cursor: pointer;
   }
 `;
 export const Cell = styled.div`
@@ -58,5 +59,33 @@ export const Cell = styled.div`
   @media (max-width: 481px) {
     font-size: 1em
     padding: 0 5px 0 5px;
+  }
+`;
+export const DeleteButton = styled.button`
+  color: white;
+  background: red;
+  outline: none;
+  border: 0px;
+  font-size: 0.8em;
+  text-decoration: none;
+  border-radius: 1em;
+  :hover {
+    outline: none;
+    opacity: 0.5;
+  }
+  :active {
+    outline: none;
+  }
+  :focus {
+    outline: none;
+  }
+`;
+
+export const ProductName = styled.p`
+  margin: 0px;
+  font-size: 1.3em;
+  text-decoration: underline;
+  :hover {
+    cursor: pointer;
   }
 `;

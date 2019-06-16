@@ -51,14 +51,13 @@ const input = ({
   pattern,
   patternMismatch,
   tooShort,
-  value,
-  list,
-  required
+  required,
+  component
 }) => (
   <Field
     className={className}
     name={name}
-    component="input"
+    component={component || "input"}
     type={type}
     placeholder={placeholder}
     required={required ? true : false}
@@ -83,15 +82,9 @@ export const Input = styled(input)`
   }
 `;
 
-const select = ({ children, className, name }) => (
-  <Field className={className} name={name} component="select" required>
-    {children}
-  </Field>
-);
-
-export const Select = styled(select)`
+export const Select = styled.select`
   outline: none;
-  background: transparant;
+  background: white;
   margin: 0 0 0 0;
   border-radius: 0.5em;
   border: 1px solid #858585;
@@ -108,7 +101,7 @@ export const Button = styled.button`
   background: white;
   border: 2px solid white;
   border-bottom: 3px solid #1d7143;
-  margin: 20px 0 0 0;
+  margin: 20px 20px 0 0;
   color: #212529;
   padding: 0 10px 0 10px;
   transition: 0.5s;
@@ -118,6 +111,12 @@ export const Button = styled.button`
     margin-bottom: 1px;
     padding: 0 20px 0 20px;
     border: 2px solid #1d7143;
+  }
+  :focus {
+    outline: none;
+  }
+  :active {
+    outline: none;
   }
   :disabled {
     opacity: 0.5;
@@ -176,4 +175,26 @@ export const EmptyAlert = styled(Alert)`
   width: 80%;
   border-radius: 5px;
   opacity: 0;
+`;
+
+export const AdminBar = styled.div`
+  position: fixed;
+  left: 0px;
+  top: 300px;
+  width: 60px;
+  background: transparant;
+  border: 1px solid black;
+  border-left: 0px;
+  border-radius: 0 1em 1em 0;
+  display: flex;
+  flex-flow: nowrap column;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+export const AdminLink = styled.a`
+  width: 50px;
+  height: 50px;
+  background-image: url(admin.png);
+  background-size: cover;
 `;
