@@ -9,11 +9,17 @@ import Register from "./containers/register/register";
 import Profile from "./containers/profile/profile";
 import EditProfile from "./containers/editprofile/editprofile";
 import Catalog from "./containers/catalog/catalog";
+import ProductPage from "./components/productpage/productpage";
 import { AdminBar, AdminLink } from "../style";
 
 class App extends Component {
   state = {
     show: false
+  };
+  toggle = () => {
+    this.setState({
+      show: !this.state.show
+    });
   };
   handleShow = () => {
     this.setState({ show: true });
@@ -48,6 +54,7 @@ class App extends Component {
           user={this.props.users.email ? this.props.users : false}
           onLogOut={this.onLogOut}
           handleClose={this.handleClose}
+          toggle={this.toggle}
         />
         <Main>
           <Switch>
@@ -55,6 +62,7 @@ class App extends Component {
             <Route path="/depot/profile" component={Profile} />
             <Route path="/depot/edit-profile" component={EditProfile} />
             <Route path="/depot/register" component={Register} />
+            <Route path="/depot/product" component={ProductPage} />
             <Redirect to="/notfound" />
           </Switch>
         </Main>

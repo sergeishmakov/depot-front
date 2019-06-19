@@ -11,7 +11,7 @@ import {
 } from "./style-productslist";
 import { Row, Select } from "../userlist/style-userlist";
 import AddForm from "../add-form/add-form.jsx";
-import Product from "../product/product";
+import Product from "../adminproduct/product";
 import { uniq } from "lodash";
 import Modal from "react-modal";
 
@@ -223,7 +223,6 @@ class ProductsList extends Component {
     values.localPhotoName = await this.state.localPhotoName;
     debugger;
     createProduct(values).then(res => {
-      console.log(res.data.createProduct);
       this.state.products.push(res.data.createProduct);
       this.handleClose();
     });

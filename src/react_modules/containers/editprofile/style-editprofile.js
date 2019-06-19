@@ -42,6 +42,7 @@ export const NotPhoto = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #fff;
 `;
 
 export const FileInput = styled.input`

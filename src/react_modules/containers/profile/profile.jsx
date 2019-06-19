@@ -28,6 +28,7 @@ class Profile extends Component {
 
   render() {
     const { users } = this.props;
+
     return (
       <ProfileWrapper>
         <Blocks>

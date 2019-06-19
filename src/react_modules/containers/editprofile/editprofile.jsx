@@ -7,6 +7,7 @@ import {
   FileInput,
   NotPhoto
 } from "./style-editprofile";
+import { Row } from "../../components/userlist/style-userlist";
 import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
 import {
@@ -60,6 +61,10 @@ class EditProfile extends Component {
   validate = values => {
     validating(values);
   };
+  backHandle = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     const { users } = this.props;
     const { statusUpdate, localPhoto } = this.state;
@@ -170,9 +175,14 @@ class EditProfile extends Component {
                     )}
                   </Field>
                   <br />
-                  <Button type="submit" disabled={submitting || invalid}>
-                    Save changes
-                  </Button>
+                  <Row>
+                    <Button type="submit" disabled={submitting || invalid}>
+                      Save changes
+                    </Button>
+                    <Button type="button" onClick={this.backHandle}>
+                      Back
+                    </Button>
+                  </Row>
                 </EditedForm>
               )}
             />

@@ -29,9 +29,7 @@ export const buttondefault = `
 `;
 
 export const Title = styled.h1`
-  background: linear-gradient(0.25turn, #3790c3, #3790c3);
-  -webkit-background-clip: text;
-  color: transparent;
+  color: balck;
   margin: 20px 0 20px 0;
 `;
 export const Group = styled.div`
@@ -98,11 +96,11 @@ export const Select = styled.select`
 export const Button = styled.button`
   outline: none;
   font-size: 16pt;
-  background: white;
-  border: 2px solid white;
-  border-bottom: 3px solid #1d7143;
+  background: #ffffff00;
+  border: 2px solid #ffffff00;
+  border-bottom: 3px solid grey;
   margin: 20px 20px 0 0;
-  color: #212529;
+  color: grey;
   padding: 0 10px 0 10px;
   transition: 0.5s;
   :hover {
@@ -110,7 +108,8 @@ export const Button = styled.button`
     transition: 0.5s;
     margin-bottom: 1px;
     padding: 0 20px 0 20px;
-    border: 2px solid #1d7143;
+    border: 2px solid #000;
+    color: black;
   }
   :focus {
     outline: none;

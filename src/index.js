@@ -5,10 +5,9 @@ import store from "./react_modules/store";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { Provider } from "react-redux";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-
+import "bootstrap/dist/css/bootstrap.css";
 import NotFound from "./react_modules/containers/notfound/notfound";
 import Admin from "./react_modules/containers/admin/admin";
 import App from "./react_modules/App";

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Header, Main, Title, Link } from "./admin-style";
 import UsersList from "../../components/userlist/userlist";
 import ProductsList from "../../components/productslist/productslist";
+import { connect } from "react-redux";
 
 class Admin extends Component {
   state = {
@@ -20,6 +21,7 @@ class Admin extends Component {
       window.location = "/";
     }
   };
+
   render() {
     const { usersVisible, productsVisible } = this.state;
     return (
@@ -51,5 +53,11 @@ class Admin extends Component {
     );
   }
 }
+const mapStateToProps = state => ({ users: state.users });
 
-export default Admin;
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Admin);

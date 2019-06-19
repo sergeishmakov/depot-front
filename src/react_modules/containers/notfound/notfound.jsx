@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import React from "react";
 import "./notfound.css";
 
 const NotFound = () => {

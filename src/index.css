@@ -4,7 +4,9 @@ body {
   font-family: "Kodchasan", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(0.25turn, #3790c3, #1d7143);
+  /* background: linear-gradient(0.25turn, #3790c3, #1d7143); */
+  background-image: url(/public/bg.jpg) !important;
+  background-size: cover;
 }
 /*  background: linear-gradient(0.25turn, #c33764, #1d2671); */
 code {
