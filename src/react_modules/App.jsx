@@ -1,15 +1,16 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Main from "./components/main/main";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
-import { autenticateUser, logoutUser } from "./actions/usersActions";
+import { autenticateUser, logoutUser, getCart } from "./actions/usersActions";
 import Register from "./containers/register/register";
 import Profile from "./containers/profile/profile";
 import EditProfile from "./containers/editprofile/editprofile";
 import Catalog from "./containers/catalog/catalog";
 import ProductPage from "./components/productpage/productpage";
+import Cart from "./containers/cart/cart";
 import { AdminBar, AdminLink } from "../style";
 
 class App extends Component {
@@ -30,8 +31,9 @@ class App extends Component {
   onLogOut = () => {
     this.props.logoutUser();
   };
-  componentWillMount() {
+  componentDidMount() {
     this.props.autenticateUser();
+    this.props.getCart();
   }
   authorization = () => {
     this.props.authorizationUser().then(response => {
@@ -42,7 +44,7 @@ class App extends Component {
     const { show } = this.state;
     const user = this.props.users;
     return (
-      <Fragment>
+      <div className="bg">
         {user.status === "admin" && (
           <AdminBar>
             <AdminLink href="/admin" />
@@ -55,6 +57,7 @@ class App extends Component {
           onLogOut={this.onLogOut}
           handleClose={this.handleClose}
           toggle={this.toggle}
+          count={this.props.cart.length}
         />
         <Main>
           <Switch>
@@ -63,24 +66,22 @@ class App extends Component {
             <Route path="/depot/edit-profile" component={EditProfile} />
             <Route path="/depot/register" component={Register} />
             <Route path="/depot/product" component={ProductPage} />
+            <Route path="/depot/cart" component={Cart} />
             <Redirect to="/notfound" />
           </Switch>
         </Main>
         <Footer />
-      </Fragment>
+      </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    users: state.users
-  };
-};
+const mapStateToProps = state => ({ users: state.users, cart: state.cart });
 
 const mapDispatchToProps = {
   autenticateUser,
-  logoutUser
+  logoutUser,
+  getCart
 };
 
 export default connect(

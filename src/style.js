@@ -28,7 +28,7 @@ export const buttondefault = `
   }
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h2`
   color: balck;
   margin: 20px 0 20px 0;
 `;
@@ -135,7 +135,7 @@ export const Label = styled.label`
 export const Blocks = styled.div`
   display: flex;
   align-items: flex-start;
-  flex-direction: row;
+  flex-flow: wrap row;
   width: 100%;
 `;
 export const FirstBlock = styled.div`
@@ -144,6 +144,9 @@ export const FirstBlock = styled.div`
   flex-direction: column;
   margin: 50px 0 0 0;
   width: 40%;
+  @media (max-width: 481px) {
+    width: 100%;
+  }
 `;
 export const SecondBlock = styled.div`
   display: flex;
@@ -151,6 +154,13 @@ export const SecondBlock = styled.div`
   flex-direction: column;
   margin: 50px 0 0 0;
   width: 60%;
+  .title {
+    margin: 0 10px 10px 10px;
+    font-size: 14pt;
+  }
+  @media (max-width: 481px) {
+    width: 100%;
+  }
 `;
 
 const Alert = styled.span`

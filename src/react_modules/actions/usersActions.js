@@ -8,14 +8,20 @@ import {
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_FAILURE,
   UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILURE
+  UPDATE_USER_FAILURE,
+  TOCART_SUCCESS,
+  TOCART_FAILURE,
+  GET_CART_SUCCESS,
+  GET_CART_FAILURE
 } from "../../constants";
 import {
   userCreateApi,
   authorizationApi,
   autenticateApi,
   logOutApi,
-  saveChangesApi
+  saveChangesApi,
+  addToCartApi,
+  getCartApi
 } from "../api/usersApi";
 
 export const addUser = data => async dispatch => {
@@ -100,4 +106,36 @@ export const saveChanges = data => async dispatch => {
     });
   }
   return status;
+};
+
+export const addToCart = (productId, userId) => async dispatch => {
+  const status = await addToCartApi(productId, userId);
+  if (status) {
+    dispatch({
+      type: TOCART_SUCCESS,
+      payload: productId
+    });
+  } else {
+    dispatch({
+      type: TOCART_FAILURE,
+      payload: null
+    });
+  }
+  return status;
+};
+
+export const getCart = () => async dispatch => {
+  const cart = await getCartApi();
+  if (cart) {
+    dispatch({
+      type: GET_CART_SUCCESS,
+      payload: cart.data
+    });
+  } else {
+    dispatch({
+      type: GET_CART_FAILURE,
+      payload: null
+    });
+  }
+  return cart;
 };

@@ -13,7 +13,15 @@ import {
   Modal
 } from "reactstrap";
 import Login from "../../containers/login/login";
-import { Button, HelloUser, Link, Options, MiniPhoto } from "./style-header.js";
+import {
+  Button,
+  HelloUser,
+  Link,
+  Options,
+  MiniPhoto,
+  Cart,
+  Count
+} from "./style-header.js";
 
 class Header extends React.Component {
   render() {
@@ -24,7 +32,8 @@ class Header extends React.Component {
       onLogOut,
       handleShow,
       toggle,
-      isOpen
+      isOpen,
+      count
     } = this.props;
     return (
       <Fragment>
@@ -37,6 +46,9 @@ class Header extends React.Component {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
+              <Cart href={`/depot/cart`} count={count}>
+                {count && <Count>{`${count} x`}</Count>}
+              </Cart>
               <NavItem>
                 <NavLink href="/">Catalog</NavLink>
               </NavItem>

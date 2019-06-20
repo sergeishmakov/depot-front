@@ -5,7 +5,7 @@ export const Button = styled.button`
   background: #2b5f2500;
   border: 2px solid #2b5f2500;
   border-bottom: 2px solid grey;
-  margin: 0 5px 0 5px;
+  margin: 10px 5px 0 5px;
   color: grey;
   outline: none;
   display: inline-block;
@@ -35,7 +35,7 @@ export const Link = styled.a`
   border: 2px solid #2b5f2500;
   border-bottom: 2px solid grey;
   text-align: center;
-  margin: 0 5px 0 5px;
+  margin: 10px 5px 0 5px;
   color: grey;
   :hover {
     border-radius: 2em;
@@ -80,4 +80,28 @@ export const HelloUser = styled(Hello)`
   :hover {
     color: #000;
   }
+`;
+
+export const Cart = styled.a`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-image: url(/cart.png);
+  background-size: 70%;
+  background-position: right center;
+  background-repeat: no-repeat;
+  width: 65px;
+  height: 40px;
+  color: #117ae5;
+  font-weight: bold;
+  :hover {
+    color: #044e9b;
+    text-decoration: none;
+    background-image: url(/carth.png);
+  }
+`;
+
+export const Count = styled.p`
+  margin: 4px 2px 2px 0;
+  font-size: 1em;
 `;

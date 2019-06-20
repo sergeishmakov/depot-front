@@ -30,6 +30,7 @@ export const Option = styled.option`
 export const Row = styled.div`
   display: flex;
   flex-flow: wrap row;
+  justify-content: center;
   margin: 0 10px 20px 10px;
   @media (min-width: 768px) {
     flex-flow: wrap row;

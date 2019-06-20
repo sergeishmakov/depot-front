@@ -42,4 +42,20 @@ export const saveChangesApi = async data => {
   return res.data;
 };
 
-export const getUsers = async () => {};
+export const addToCartApi = async (productId, userId) => {
+  const res = await instance.post(
+    `tocart`,
+    { productId, userId },
+    {
+      withCredentials: true
+    }
+  );
+  return res.data;
+};
+
+export const getCartApi = async id => {
+  const res = await instance.get(`getcart`, {
+    withCredentials: true
+  });
+  return res;
+};
