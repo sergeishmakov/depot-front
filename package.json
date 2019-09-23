@@ -1,0 +1,55 @@
+{
+  "name": "depot-front",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "apollo-boost": "^0.4.1",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
+    "final-form": "^4.13.0",
+    "graphql": "^14.3.1",
+    "graphql-tag": "^2.10.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-apollo": "^2.5.6",
+    "react-apollo-hooks": "^0.4.5",
+    "react-bootstrap": "^1.0.0-beta.8",
+    "react-dom": "^16.8.6",
+    "react-final-form": "^5.1.2",
+    "react-final-form-html5-validation": "^1.0.3",
+    "react-modal": "^3.8.1",
+    "react-redux": "^7.0.3",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.0",
+    "react-select": "^3.0.4",
+    "reactstrap": "^8.0.0",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.2.0",
+    "validator": "^10.11.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {}
+}

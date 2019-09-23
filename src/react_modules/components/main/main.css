@@ -1,0 +1,16 @@
+.main {
+  min-height: 700px;
+  display: flex;
+  flex-flow: nowrap col;
+  justify-content: center;
+  margin: 50px 10% 0px 10%;
+  background-color: #ffffffd8;
+  border-radius: 30px;
+}
+
+@media (max-width: 481px) {
+  .main {
+    margin: 0px;
+    border-radius: 0px;
+  }
+}

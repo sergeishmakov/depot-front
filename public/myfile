@@ -1,0 +1,82 @@
+ {/* {this.props.users.error &&
+            <p className="error">{this.props.users.message} </p>} */}
+          {/* <div className="register-form">
+            <div className="register-form__input-wrapper">
+              <label className = "register-form__label" htmlFor="firstName">Enter your first name:</label>
+              <input
+                className="register-form__label"
+                name="firstName"
+                type="text"
+                value={firstName}
+                onChange={this.onChange}
+                placeholder="First name"
+              />
+            </div>
+            
+            <div className="register-form__input-wrapper">
+              <label className = "register-form__label" htmlFor="lastName">Enter your last name:</label>
+              <input
+                name="lastName"
+                className="register-input"
+                type="text"
+                value={lastName}
+                onChange={this.onChange}
+                placeholder="Last name"
+              />
+
+            </div>
+
+            <label  htmlFor="email">Enter your email address:</label>
+            <div className="input-wrapper">
+              {!isValidEmail &&
+                email &&
+                <p className="error">Invalid email address</p>}
+              <input
+                name="email"
+                className="register-input"
+                type="text"
+                value={email}
+                onChange={this.onChange}
+                placeholder="Email"
+              />
+
+            </div>
+            <label htmlFor="password">Enter your password:</label>
+            <div className="input-wrapper">
+              {!isValidPassword &&
+                password &&
+                <p className="error">Password is too short</p>}
+              <input
+                name="password"
+                className="register-input"
+                type="password"
+                value={password}
+                onChange={this.onChange}
+                placeholder="Password"
+              />
+            </div>
+            <label htmlFor="confirmPassword">Enter password again:</label>
+            <div className="input-wrapper">
+              {!isValidConfirmPassword &&
+                confirmPassword &&
+                <p className="error">Passwords do not match</p>}
+              <input
+                name="confirmPassword"
+                className="register-input"
+                type="password"
+                value={confirmPassword}
+                onChange={this.onChange}
+                placeholder="Confirm password"
+              />
+            </div>
+
+          </div>
+          <button
+            disabled={
+              !isValidEmail && !isValidPassword && !isValidConfirmPassword
+            }
+            className="register-button"
+            onClick={this.registerUser}
+          >
+            Register
+          </button> */}
